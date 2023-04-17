@@ -8,9 +8,9 @@ import 'default_theme.dart';
 import 'notch_builder.dart';
 
 /// A widget that draws a notch on the ruler with a number
-/// 
+///
 /// [distance] define the notches count on the ruler
-/// 
+///
 /// ![](https://raw.githubusercontent.com/)
 class Notch extends StatelessWidget {
   const Notch(
@@ -27,6 +27,7 @@ class Notch extends StatelessWidget {
     this.showLastNumber = false,
     this.base,
     this.notchColor,
+    this.numberTextStyle,
     this.notchScaleFactor,
   })  : assert(number == null || number >= 0, "number must be positive"),
         assert(
@@ -62,26 +63,31 @@ class Notch extends StatelessWidget {
 
   final double? thickness;
 
+  final TextStyle? numberTextStyle;
+
   @override
   Widget build(BuildContext context) {
-    final RulerThemeData rulerTheme = RulerTheme.of(context);
+    final RulerThemeData? rulerTheme = RulerTheme.of(context);
+
     final RulerThemeData defaults = getDefaultsRulerThemeData(context);
     final RulerSide notchSide =
-        this.notchSide ?? rulerTheme.notchSide ?? defaults.notchSide!;
+        this.notchSide ?? rulerTheme?.notchSide ?? defaults.notchSide!;
     final RulerSide numberSide =
-        this.numberSide ?? rulerTheme.numberSide ?? defaults.numberSide!;
-    final bool base = this.base ?? rulerTheme.base ?? defaults.base!;
+        this.numberSide ?? rulerTheme?.numberSide ?? defaults.numberSide!;
+    final bool base = this.base ?? rulerTheme?.base ?? defaults.base!;
     final Color notchColor =
-        this.notchColor ?? rulerTheme.notchColor ?? defaults.notchColor!;
+        this.notchColor ?? rulerTheme?.notchColor ?? defaults.notchColor!;
     final double notchScaleFactor = this.notchScaleFactor ??
-        rulerTheme.notchScaleFactor ??
+        rulerTheme?.notchScaleFactor ??
         defaults.notchScaleFactor!;
     final double numberSpacing = this.numberSpacing ??
-        rulerTheme.numberSpacing ??
+        rulerTheme?.numberSpacing ??
         defaults.numberSpacing!;
-
+    final TextStyle numberTextStyle = this.numberTextStyle ??
+        rulerTheme?.numberTextStyle ??
+        defaults.numberTextStyle!;
     final double thickness =
-        this.thickness ?? rulerTheme.thickness ?? defaults.thickness!;
+        this.thickness ?? rulerTheme?.thickness ?? defaults.thickness!;
 
     final notches = NotchBuilder(
       axis: axis,
@@ -166,9 +172,8 @@ class Notch extends StatelessWidget {
           direction: axis,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text("${number!}", style: rulerTheme.numberTextStyle),
-            if (showLastNumber)
-              Text("${number! + 1}", style: rulerTheme.numberTextStyle),
+            Text("${number!}", style: numberTextStyle),
+            if (showLastNumber) Text("${number! + 1}", style: numberTextStyle),
           ],
         ),
     ];

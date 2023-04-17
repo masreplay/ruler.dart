@@ -88,15 +88,15 @@ class RulerTheme extends InheritedTheme {
 
   final RulerThemeData data;
 
-  static RulerThemeData of(BuildContext context) {
+  static RulerThemeData? of(BuildContext context) {
     final theme = context.dependOnInheritedWidgetOfExactType<RulerTheme>();
-    return theme?.data ?? RulerThemeData();
+    return theme?.data;
   }
 
   @override
   Widget wrap(BuildContext context, Widget child) {
     final theme = RulerTheme.of(context);
-    return RulerTheme(data: theme, child: child);
+    return RulerTheme(data: theme ?? RulerThemeData(), child: child);
   }
 
   @override

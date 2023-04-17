@@ -17,7 +17,7 @@ RulerThemeData rulerThemeDataDefaultsM3(BuildContext context) {
     numberSpacing: 8.0,
     numberTextStyle: Theme.of(context).textTheme.bodyMedium!,
     notchScaleFactor: 1.0,
-    notchColor: Theme.of(context).colorScheme.outlineVariant.withOpacity(0.5),
+    notchColor: Theme.of(context).colorScheme.outlineVariant,
     thickness: 1.0,
   );
 }

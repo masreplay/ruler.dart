@@ -1,4 +1,1 @@
-<!-- table -->
-| text | code         | image                                        |
-| ---- | ------------ | -------------------------------------------- |
-| test | ```Home()``` | ![image](http://via.placeholder.com/120x120) |
+docs: code viewer is extracted from flutter gallery repo

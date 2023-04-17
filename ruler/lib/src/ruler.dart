@@ -105,26 +105,26 @@ class Ruler extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final RulerThemeData rulerTheme = RulerTheme.of(context);
+    final RulerThemeData? rulerTheme = RulerTheme.of(context);
     final RulerThemeData defaults = getDefaultsRulerThemeData(context);
     final RulerSide textSide =
-        this.textSide ?? rulerTheme.numberSide ?? defaults.numberSide!;
+        this.textSide ?? rulerTheme?.numberSide ?? defaults.numberSide!;
     final RulerSide notchSide =
-        this.notchSide ?? rulerTheme.notchSide ?? defaults.notchSide!;
+        this.notchSide ?? rulerTheme?.notchSide ?? defaults.notchSide!;
     final TextStyle numberTextStyle = this.numberTextStyle ??
-        rulerTheme.numberTextStyle ??
+        rulerTheme?.numberTextStyle ??
         defaults.numberTextStyle!;
     final double notchScaleFactor = this.notchScaleFactor ??
-        rulerTheme.notchScaleFactor ??
+        rulerTheme?.notchScaleFactor ??
         defaults.notchScaleFactor!;
     final Color notchColor =
-        this.notchColor ?? rulerTheme.notchColor ?? defaults.notchColor!;
-    final bool base = this.base ?? rulerTheme.base ?? defaults.base!;
+        this.notchColor ?? rulerTheme?.notchColor ?? defaults.notchColor!;
+    final bool base = this.base ?? rulerTheme?.base ?? defaults.base!;
     final double numberSpacing = this.numberSpacing ??
-        rulerTheme.numberSpacing ??
+        rulerTheme?.numberSpacing ??
         defaults.numberSpacing!;
     final double thickness =
-        this.thickness ?? rulerTheme.thickness ?? defaults.thickness!;
+        this.thickness ?? rulerTheme?.thickness ?? defaults.thickness!;
 
     final rulerThemeMerged = RulerThemeData(
       notchColor: notchColor,

@@ -1,8 +1,10 @@
+import 'dart:async';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
 
-import 'documentations.dart';
+import 'build_docs.dart';
+import 'demos/documentations.dart';
 
 void main() {
   runApp(const MyApp());
@@ -15,44 +17,50 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(
-        primarySwatch: Colors.blue,
-        brightness: Brightness.dark,
-        useMaterial3: true,
+        brightness: Brightness.light,
+        useMaterial3: false,
       ),
       home: const HomePage(),
     );
   }
 }
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({super.key});
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  @override
+  void reassemble() {
+    super.reassemble();
+    buildDocumentations();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Ruler"),
-      ),
-      body: Column(
-        children: [
-          TextButton(
-            onPressed: () async {
-              final buffer = StringBuffer();
-              for (final doc in documentations) {
-                buffer.writeln(await doc.buildMarkdown());
-              }
-              final file = await File("${getDocsDir()}/docs/README.md")
-                  .writeAsString(buffer.toString());
-              debugPrint(file.path);
-            },
-            child: const Text("Print"),
-          )
-        ],
+      appBar: AppBar(title: const Text("Ruler")),
+      body: FilledButton(
+        onPressed: () {
+          buildDocumentations();
+        },
+        child: const Text("Build"),
       ),
     );
   }
 
-  String getDocsDir() {
-    return Directory.current.path;
+  Future<void> buildDocumentations() async {
+    final buffer = StringBuffer();
+    for (final doc in getDocumentations(context)) {
+      buffer.writeln(await buildMarkdown(doc));
+    }
+
+    final mainDir = Directory.current.path;
+    final file =
+        await File("$mainDir/docs/README.md").writeAsString(buffer.toString());
+    debugPrint(file.path);
   }
 }
