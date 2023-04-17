@@ -50,7 +50,7 @@ Future<Uint8List?> generateImage({
   pipelineOwner.flushPaint();
   pipelineOwner.flushSemantics();
 
-  final image = await repaintBoundary.toImage(pixelRatio: 2);
+  final image = await repaintBoundary.toImage(pixelRatio: devicePixelRatio);
 
   final byteData = await image.toByteData(format: ui.ImageByteFormat.png);
 

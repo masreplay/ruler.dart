@@ -1,9 +1,8 @@
 import 'dart:io';
 
-import 'package:docs/dir.dart';
-import 'package:docs/generate_image.dart';
 import 'package:flutter/material.dart';
-import 'package:ruler/ruler.dart';
+
+import 'documentations.dart';
 
 void main() {
   runApp(const MyApp());
@@ -17,6 +16,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       theme: ThemeData(
         primarySwatch: Colors.blue,
+        brightness: Brightness.dark,
         useMaterial3: true,
       ),
       home: const HomePage(),
@@ -33,29 +33,26 @@ class HomePage extends StatelessWidget {
       appBar: AppBar(
         title: const Text("Ruler"),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
-          children: [
-            Notch(10.mm),
-            Column(),
-            TextButton(
-              onPressed: () async {
-                final image = await generateImage(
-                  widget: Directionality(
-                    textDirection: TextDirection.ltr,
-                    child: Notch(10.mm),
-                  ),
-                  size: const Size(100, 100),
-                );
-                const filename = "test.png";
-                File("$dir/docs/$filename").writeAsBytes(image!);
-              },
-              child: const Text("Print"),
-            )
-          ],
-        ),
+      body: Column(
+        children: [
+          TextButton(
+            onPressed: () async {
+              final buffer = StringBuffer();
+              for (final doc in documentations) {
+                buffer.writeln(await doc.buildMarkdown());
+              }
+              final file = await File("${getDocsDir()}/docs/README.md")
+                  .writeAsString(buffer.toString());
+              debugPrint(file.path);
+            },
+            child: const Text("Print"),
+          )
+        ],
       ),
     );
+  }
+
+  String getDocsDir() {
+    return Directory.current.path;
   }
 }

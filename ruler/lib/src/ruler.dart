@@ -24,7 +24,6 @@ enum RulerType {
 class Ruler extends StatelessWidget {
   const Ruler.count(
     DistanceUnit this.notchCount, {
-    super.key,
     this.axis = Axis.horizontal,
     this.highlight,
     this.notchSide,
@@ -36,12 +35,12 @@ class Ruler extends StatelessWidget {
     this.notchColor,
     this.base,
     this.thickness,
+    super.key,
   })  : rulerType = RulerType.count,
         notchWidth = null;
 
   const Ruler.dynamic(
     DistanceUnit this.notchWidth, {
-    super.key,
     this.axis = Axis.horizontal,
     this.highlight,
     this.textSide,
@@ -53,6 +52,7 @@ class Ruler extends StatelessWidget {
     this.base,
     this.numberSpacing,
     this.thickness,
+    super.key,
   })  : rulerType = RulerType.dynamic,
         notchCount = null;
 
