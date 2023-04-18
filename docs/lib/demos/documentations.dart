@@ -5,6 +5,9 @@ import 'package:ruler/ruler.dart';
 import '../documentation.dart';
 
 List<Documentation> getDocumentations(BuildContext context) {
+  String code(TextSpan Function(BuildContext context) f) =>
+      f(context).toPlainText().trim();
+
   return [
     const Documentation.text(
       "Real Ruler with notches supports both metric and imperial units.",
@@ -12,18 +15,44 @@ List<Documentation> getDocumentations(BuildContext context) {
     Documentation.widgetsTable(
       widgets: [
         DocumentationWidget(
-            description: "Change color",
-            code: CodeSegments.notchColor(context).toPlainText().trim(),
+            description: "Ruler.count fit the given distance to the width",
+            code: code(CodeSegments.count),
             widget:
-                // BEGIN notchColor#1
+                // BEGIN count
+                Ruler.count(3.cm)
+            // END
+            ),
+        DocumentationWidget(
+            description:
+                "Ruler.dynamic create n of notches depending on the width",
+            code: code(CodeSegments.dynamic),
+            widget:
+                // BEGIN dynamic
+                Ruler.dynamic(3.cm)
+            // END
+            ),
+        DocumentationWidget(
+            description:
+                "Ruler.real create an in real life ruler equivalent to real cm or inches",
+            code: code(CodeSegments.real),
+            widget:
+                // BEGIN real
+                Ruler.real(MeasureSystem.imperial)
+            // END
+            ),
+        DocumentationWidget(
+            description: "Change color notches color",
+            code: code(CodeSegments.notchColor),
+            widget:
+                // BEGIN notchColor
                 Ruler.count(1.cm, notchColor: Colors.black)
             // END
             ),
         DocumentationWidget(
-            description: "Change size",
-            code: CodeSegments.axis(context).toPlainText().trim(),
+            description: "Change axis to vertical or horizontal",
+            code: code(CodeSegments.axis),
             widget:
-                // BEGIN axis#1
+                // BEGIN axis
                 Ruler.count(1.cm, axis: Axis.vertical)
             // END
             ),

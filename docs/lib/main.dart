@@ -54,13 +54,15 @@ class _HomePageState extends State<HomePage> {
 
   Future<void> buildDocumentations() async {
     final buffer = StringBuffer();
+
     for (final doc in getDocumentations(context)) {
       buffer.writeln(await buildMarkdown(doc));
     }
 
     final mainDir = Directory.current.path;
+    final imagesDir = "$mainDir/docs";
     final file =
-        await File("$mainDir/docs/README.md").writeAsString(buffer.toString());
+        await File("$imagesDir/README.md").writeAsString(buffer.toString());
     debugPrint(file.path);
   }
 }

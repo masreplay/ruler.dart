@@ -26,7 +26,39 @@ class CodeSegments {
       TextSpan(style: codeStyle.baseStyle, text: ' '),
       TextSpan(style: codeStyle.classStyle, text: 'Axis'),
       TextSpan(style: codeStyle.punctuationStyle, text: '.'),
-      TextSpan(style: codeStyle.baseStyle, text: 'horizontal'),
+      TextSpan(style: codeStyle.baseStyle, text: 'vertical'),
+      TextSpan(style: codeStyle.punctuationStyle, text: ')'),
+      TextSpan(style: codeStyle.baseStyle, text: '\u000a\u000a'),
+    ]);
+  }
+
+  static TextSpan count(BuildContext context) {
+    final codeStyle = CodeStyle.of(context);
+    return TextSpan(children: [
+      TextSpan(style: codeStyle.baseStyle, text: '\u000a\u000a'),
+      TextSpan(style: codeStyle.classStyle, text: 'Ruler'),
+      TextSpan(style: codeStyle.punctuationStyle, text: '.'),
+      TextSpan(style: codeStyle.baseStyle, text: 'count'),
+      TextSpan(style: codeStyle.punctuationStyle, text: '('),
+      TextSpan(style: codeStyle.numberStyle, text: '3'),
+      TextSpan(style: codeStyle.punctuationStyle, text: '.'),
+      TextSpan(style: codeStyle.baseStyle, text: 'cm'),
+      TextSpan(style: codeStyle.punctuationStyle, text: ')'),
+      TextSpan(style: codeStyle.baseStyle, text: '\u000a\u000a'),
+    ]);
+  }
+
+  static TextSpan dynamic(BuildContext context) {
+    final codeStyle = CodeStyle.of(context);
+    return TextSpan(children: [
+      TextSpan(style: codeStyle.baseStyle, text: '\u000a\u000a'),
+      TextSpan(style: codeStyle.classStyle, text: 'Ruler'),
+      TextSpan(style: codeStyle.punctuationStyle, text: '.'),
+      TextSpan(style: codeStyle.keywordStyle, text: 'dynamic'),
+      TextSpan(style: codeStyle.punctuationStyle, text: '('),
+      TextSpan(style: codeStyle.numberStyle, text: '3'),
+      TextSpan(style: codeStyle.punctuationStyle, text: '.'),
+      TextSpan(style: codeStyle.baseStyle, text: 'cm'),
       TextSpan(style: codeStyle.punctuationStyle, text: ')'),
       TextSpan(style: codeStyle.baseStyle, text: '\u000a\u000a'),
     ]);
@@ -50,6 +82,22 @@ class CodeSegments {
       TextSpan(style: codeStyle.classStyle, text: 'Colors'),
       TextSpan(style: codeStyle.punctuationStyle, text: '.'),
       TextSpan(style: codeStyle.baseStyle, text: 'black'),
+      TextSpan(style: codeStyle.punctuationStyle, text: ')'),
+      TextSpan(style: codeStyle.baseStyle, text: '\u000a\u000a'),
+    ]);
+  }
+
+  static TextSpan real(BuildContext context) {
+    final codeStyle = CodeStyle.of(context);
+    return TextSpan(children: [
+      TextSpan(style: codeStyle.baseStyle, text: '\u000a\u000a'),
+      TextSpan(style: codeStyle.classStyle, text: 'Ruler'),
+      TextSpan(style: codeStyle.punctuationStyle, text: '.'),
+      TextSpan(style: codeStyle.baseStyle, text: 'real'),
+      TextSpan(style: codeStyle.punctuationStyle, text: '('),
+      TextSpan(style: codeStyle.classStyle, text: 'MeasureSystem'),
+      TextSpan(style: codeStyle.punctuationStyle, text: '.'),
+      TextSpan(style: codeStyle.baseStyle, text: 'imperial'),
       TextSpan(style: codeStyle.punctuationStyle, text: ')'),
       TextSpan(style: codeStyle.baseStyle, text: '\u000a\u000a'),
     ]);
