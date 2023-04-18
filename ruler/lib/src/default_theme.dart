@@ -18,7 +18,7 @@ RulerThemeData rulerThemeDataDefaultsM3(BuildContext context) {
     numberTextStyle: Theme.of(context).textTheme.bodyMedium!,
     notchScaleFactor: 1.0,
     notchColor: Theme.of(context).colorScheme.outlineVariant,
-    thickness: 0.3,
+    thickness: 1,
   );
 }
 
@@ -33,6 +33,6 @@ RulerThemeData rulerThemeDataDefaultsM2(BuildContext context) {
     numberTextStyle: Theme.of(context).textTheme.bodyText2!,
     notchScaleFactor: 1.0,
     notchColor: Theme.of(context).dividerColor,
-    thickness: 0.75,
+    thickness: 1,
   );
 }

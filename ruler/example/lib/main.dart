@@ -30,26 +30,15 @@ class HomePage extends StatelessWidget {
       appBar: AppBar(title: const Text("Ruler")),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: RulerTheme(
-          data: RulerThemeData(
-            notchColor: Colors.red,
-            thickness: 2,
-            numberTextStyle: const TextStyle(color: Colors.red),
-            numberSpacing: 1,
-          ),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Ruler.count(
-                3.cm,
-                notchScaleFactor: 4,
-              ),
-              Ruler.count(10.cm),
-              Ruler.dynamic(190.cm),
-              Ruler.dynamic(200.inch()),
-            ],
-          ),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Ruler.count(3.cm, notchScaleFactor: 4),
+            Ruler.count(10.cm),
+            Ruler.dynamic(190.cm),
+            Ruler.dynamic(200.inch()),
+          ],
         ),
       ),
     );
