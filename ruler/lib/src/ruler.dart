@@ -157,8 +157,17 @@ class Ruler extends StatelessWidget {
                   axis: axis,
                 );
               },
-              inch: (double value, int graduation) {
-                return Container();
+              inch: (double count, int graduation) {
+                final inch = constraints.maxWidth / count;
+                final inches = count.toInt();
+                final extra = count - inches;
+
+                return InchesRuler(
+                  inchSize: inch,
+                  inches: inches,
+                  extra: extra,
+                  axis: axis,
+                );
               },
             );
           case RulerType.real:
@@ -189,12 +198,6 @@ class Ruler extends StatelessWidget {
                           inches: inches.toInt(),
                           extra: extra,
                           axis: axis,
-                          notchSide: notchSide,
-                          textSide: textSide,
-                          base: base,
-                          notchColor: notchColor,
-                          notchScaleFactor: notchScaleFactor,
-                          numberSpacing: numberSpacing,
                         );
                       },
                     );
@@ -263,12 +266,6 @@ class InchesRuler extends StatelessWidget {
     required this.inchSize,
     required this.extra,
     required this.axis,
-    required this.notchSide,
-    required this.textSide,
-    required this.base,
-    required this.notchColor,
-    required this.notchScaleFactor,
-    required this.numberSpacing,
   });
 
   final int inches;
@@ -278,18 +275,6 @@ class InchesRuler extends StatelessWidget {
   final double extra;
 
   final Axis axis;
-
-  final RulerSide notchSide;
-
-  final RulerSide textSide;
-
-  final bool base;
-
-  final Color notchColor;
-
-  final double notchScaleFactor;
-
-  final double numberSpacing;
 
   @override
   Widget build(BuildContext context) {
@@ -303,14 +288,8 @@ class InchesRuler extends StatelessWidget {
             size: inchSize,
             axis: axis,
             number: i,
-            notchSide: notchSide,
             showLastPart: showLastPart,
             showLastNumber: false,
-            base: base,
-            notchColor: notchColor,
-            notchScaleFactor: notchScaleFactor,
-            numberSpacing: numberSpacing,
-            numberSide: textSide,
           );
         }),
         if (extra > 0)
@@ -319,14 +298,8 @@ class InchesRuler extends StatelessWidget {
             size: inchSize * extra,
             axis: axis,
             number: inches,
-            notchSide: notchSide,
             showLastPart: true,
             showLastNumber: true,
-            base: base,
-            notchColor: notchColor,
-            notchScaleFactor: notchScaleFactor,
-            numberSpacing: numberSpacing,
-            numberSide: textSide,
           ),
       ],
     );

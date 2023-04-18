@@ -41,7 +41,8 @@ class HomePage extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Ruler.count(2.cm),
+              Ruler.count(3.cm),
+              Ruler.dynamic(3.cm),
               Notch(
                 10.mm,
                 base: true,
