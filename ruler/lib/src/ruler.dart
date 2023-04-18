@@ -25,35 +25,31 @@ class Ruler extends StatelessWidget {
   const Ruler.count(
     DistanceUnit this.notchCount, {
     this.axis = Axis.horizontal,
-    this.highlight,
     this.notchSide,
-    this.textDirection,
     this.numberTextStyle,
     this.textSide,
     this.numberSpacing,
     this.notchScaleFactor,
     this.notchColor,
-    this.base,
+    this.showBase,
     this.thickness,
     super.key,
-  })  : rulerType = RulerType.count,
+  })  : _rulerType = RulerType.count,
         notchWidth = null;
 
   const Ruler.dynamic(
     DistanceUnit this.notchWidth, {
     this.axis = Axis.horizontal,
-    this.highlight,
     this.textSide,
     this.notchSide,
-    this.textDirection,
     this.numberTextStyle,
     this.notchScaleFactor,
     this.notchColor,
-    this.base,
+    this.showBase,
     this.numberSpacing,
     this.thickness,
     super.key,
-  })  : rulerType = RulerType.dynamic,
+  })  : _rulerType = RulerType.dynamic,
         notchCount = null;
 
   Ruler.real(
@@ -61,47 +57,54 @@ class Ruler extends StatelessWidget {
     int graduation = 8,
     super.key,
     this.axis = Axis.horizontal,
-    this.highlight,
     this.textSide,
     this.notchSide,
-    this.textDirection,
     this.numberTextStyle,
     this.notchScaleFactor,
     this.notchColor,
-    this.base,
+    this.showBase,
     this.numberSpacing,
     this.thickness,
-  })  : rulerType = RulerType.real,
+  })  : _rulerType = RulerType.real,
         notchWidth = system.toDistanceUnit(graduation),
         notchCount = null;
 
-  final RulerType rulerType;
+  /// The type of the ruler to be created
+  final RulerType _rulerType;
 
+  /// The notch width in pixels used with [RulerType.dynamic]
+  /// the distance type used for graduation only
   final DistanceUnit? notchWidth;
 
+  /// The number of notches used with [RulerType.count]
   final DistanceUnit? notchCount;
 
-  final TextDirection? textDirection;
-
-  final EdgeInsets? highlight;
-
+  /// Used for the numbers
   final TextStyle? numberTextStyle;
 
+  /// The notches and base scale factor
   final double? notchScaleFactor;
 
+  /// The notches and base color
   final Color? notchColor;
 
+  /// The spacing between the numbers and the notches
   final double? numberSpacing;
 
+  /// The thickness of notches and base
   final double? thickness;
 
+  /// The side of the numbers to the notches
   final RulerSide? textSide;
 
+  /// The side of the notches and the base to the ruler
   final RulerSide? notchSide;
 
+  /// The axis of the ruler [Axis.horizontal] or [Axis.vertical]
   final Axis axis;
 
-  final bool? base;
+  /// Show the base of the ruler
+  final bool? showBase;
 
   @override
   Widget build(BuildContext context) {
@@ -119,20 +122,21 @@ class Ruler extends StatelessWidget {
         defaults.notchScaleFactor!;
     final Color notchColor =
         this.notchColor ?? rulerTheme?.notchColor ?? defaults.notchColor!;
-    final bool base = this.base ?? rulerTheme?.base ?? defaults.base!;
+    final bool showBase =
+        this.showBase ?? rulerTheme?.showBase ?? defaults.showBase!;
     final double numberSpacing = this.numberSpacing ??
         rulerTheme?.numberSpacing ??
         defaults.numberSpacing!;
     final double thickness =
         this.thickness ?? rulerTheme?.thickness ?? defaults.thickness!;
 
-    final rulerThemeMerged = RulerThemeData(
+    final RulerThemeData rulerThemeMerged = RulerThemeData(
       notchColor: notchColor,
       notchScaleFactor: notchScaleFactor,
       numberSide: textSide,
       notchSide: notchSide,
       numberTextStyle: numberTextStyle,
-      base: base,
+      showBase: showBase,
       numberSpacing: numberSpacing,
       thickness: thickness,
     );
@@ -140,9 +144,34 @@ class Ruler extends StatelessWidget {
     return RulerTheme(
       data: rulerThemeMerged,
       child: LayoutBuilder(builder: (context, constraints) {
-        switch (rulerType) {
+        switch (_rulerType) {
           case RulerType.dynamic:
-            return Container();
+            return notchWidth!.when(
+              cm: (width) {
+                final cmSize = width;
+                final cmCount = constraints.maxWidth ~/ cmSize;
+                final extra = constraints.maxWidth / cmSize - cmCount;
+
+                return CentimeterRuler(
+                  cmSize: cmSize,
+                  cmsCount: cmCount,
+                  extraCm: extra,
+                  axis: axis,
+                );
+              },
+              inch: (width, graduation) {
+                final inch = width;
+                final inches = constraints.maxWidth ~/ inch;
+                final extra = constraints.maxWidth / inch - inches;
+
+                return InchesRuler(
+                  inchSize: inch,
+                  inches: inches,
+                  extra: extra,
+                  axis: axis,
+                );
+              },
+            );
           case RulerType.count:
             return notchCount!.when(
               cm: (count) {

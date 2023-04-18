@@ -46,7 +46,7 @@ class RulerThemeData with _$RulerThemeData {
     RulerSide? numberSide,
 
     /// show base at the end of [notchSide]
-    bool? base,
+    bool? showBase,
 
     /// The spacing between the notch and the number.
     double? numberSpacing,
@@ -72,7 +72,7 @@ class RulerThemeData with _$RulerThemeData {
           TextStyle.lerp(a?.numberTextStyle, b?.numberTextStyle, t),
       notchColor: Color.lerp(a?.notchColor, b?.notchColor, t),
       notchScaleFactor: lerpDouble(a?.notchScaleFactor, b?.notchScaleFactor, t),
-      base: t < 0.5 ? a?.base : b?.base,
+      showBase: t < 0.5 ? a?.showBase : b?.showBase,
       numberSpacing: lerpDouble(a?.numberSpacing, b?.numberSpacing, t),
       thickness: lerpDouble(a?.thickness, b?.thickness, t),
     );

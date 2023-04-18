@@ -25,7 +25,7 @@ class Notch extends StatelessWidget {
     this.axis = Axis.horizontal,
     this.showLastPart = true,
     this.showLastNumber = false,
-    this.base,
+    this.showBase,
     this.notchColor,
     this.numberTextStyle,
     this.notchScaleFactor,
@@ -41,7 +41,7 @@ class Notch extends StatelessWidget {
 
   final Axis axis;
 
-  final bool? base;
+  final bool? showBase;
 
   /// the amount of padding between the number and the notch
   final double? numberSpacing;
@@ -74,7 +74,8 @@ class Notch extends StatelessWidget {
         this.notchSide ?? rulerTheme?.notchSide ?? defaults.notchSide!;
     final RulerSide numberSide =
         this.numberSide ?? rulerTheme?.numberSide ?? defaults.numberSide!;
-    final bool base = this.base ?? rulerTheme?.base ?? defaults.base!;
+    final bool showBase =
+        this.showBase ?? rulerTheme?.showBase ?? defaults.showBase!;
     final Color notchColor =
         this.notchColor ?? rulerTheme?.notchColor ?? defaults.notchColor!;
     final double notchScaleFactor = this.notchScaleFactor ??
@@ -128,8 +129,6 @@ class Notch extends StatelessWidget {
         );
       },
       inchBuilder: (inch, graduation, gradsCount, gradSize, extraSize) {
-        const thickness = 1.0;
-
         double getNotchLength(int position) {
           if (position == 0 || position == graduation) {
             return 20.0 * notchScaleFactor;
@@ -191,9 +190,9 @@ class Notch extends StatelessWidget {
         direction: axis.opposite,
         children: [
           if (numberSide == RulerSide.start) ...text.reversed,
-          if (base && notchSide == RulerSide.start) baseWidget,
+          if (showBase && notchSide == RulerSide.start) baseWidget,
           notches,
-          if (base && notchSide == RulerSide.end) baseWidget,
+          if (showBase && notchSide == RulerSide.end) baseWidget,
           if (numberSide == RulerSide.end) ...text,
         ],
       ),

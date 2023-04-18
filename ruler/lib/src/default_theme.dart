@@ -13,12 +13,12 @@ RulerThemeData rulerThemeDataDefaultsM3(BuildContext context) {
   return RulerThemeData(
     notchSide: RulerSide.end,
     numberSide: RulerSide.end,
-    base: true,
+    showBase: true,
     numberSpacing: 8.0,
     numberTextStyle: Theme.of(context).textTheme.bodyMedium!,
     notchScaleFactor: 1.0,
     notchColor: Theme.of(context).colorScheme.outlineVariant,
-    thickness: 1.0,
+    thickness: 0.3,
   );
 }
 
@@ -27,12 +27,12 @@ RulerThemeData rulerThemeDataDefaultsM2(BuildContext context) {
   return RulerThemeData(
     notchSide: RulerSide.end,
     numberSide: RulerSide.end,
-    base: true,
+    showBase: true,
     numberSpacing: 8.0,
     // ignore: deprecated_member_use
     numberTextStyle: Theme.of(context).textTheme.bodyText2!,
     notchScaleFactor: 1.0,
     notchColor: Theme.of(context).dividerColor,
-    thickness: 1.0,
+    thickness: 0.75,
   );
 }

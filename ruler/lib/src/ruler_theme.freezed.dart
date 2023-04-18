@@ -24,7 +24,7 @@ mixin _$RulerThemeData {
   RulerSide? get numberSide => throw _privateConstructorUsedError;
 
   /// show base at the end of [notchSide]
-  bool? get base => throw _privateConstructorUsedError;
+  bool? get showBase => throw _privateConstructorUsedError;
 
   /// The spacing between the notch and the number.
   double? get numberSpacing => throw _privateConstructorUsedError;
@@ -55,7 +55,7 @@ abstract class $RulerThemeDataCopyWith<$Res> {
   $Res call(
       {RulerSide? notchSide,
       RulerSide? numberSide,
-      bool? base,
+      bool? showBase,
       double? numberSpacing,
       TextStyle? numberTextStyle,
       double? notchScaleFactor,
@@ -78,7 +78,7 @@ class _$RulerThemeDataCopyWithImpl<$Res, $Val extends RulerThemeData>
   $Res call({
     Object? notchSide = freezed,
     Object? numberSide = freezed,
-    Object? base = freezed,
+    Object? showBase = freezed,
     Object? numberSpacing = freezed,
     Object? numberTextStyle = freezed,
     Object? notchScaleFactor = freezed,
@@ -94,9 +94,9 @@ class _$RulerThemeDataCopyWithImpl<$Res, $Val extends RulerThemeData>
           ? _value.numberSide
           : numberSide // ignore: cast_nullable_to_non_nullable
               as RulerSide?,
-      base: freezed == base
-          ? _value.base
-          : base // ignore: cast_nullable_to_non_nullable
+      showBase: freezed == showBase
+          ? _value.showBase
+          : showBase // ignore: cast_nullable_to_non_nullable
               as bool?,
       numberSpacing: freezed == numberSpacing
           ? _value.numberSpacing
@@ -133,7 +133,7 @@ abstract class _$$_RulerThemeDataCopyWith<$Res>
   $Res call(
       {RulerSide? notchSide,
       RulerSide? numberSide,
-      bool? base,
+      bool? showBase,
       double? numberSpacing,
       TextStyle? numberTextStyle,
       double? notchScaleFactor,
@@ -154,7 +154,7 @@ class __$$_RulerThemeDataCopyWithImpl<$Res>
   $Res call({
     Object? notchSide = freezed,
     Object? numberSide = freezed,
-    Object? base = freezed,
+    Object? showBase = freezed,
     Object? numberSpacing = freezed,
     Object? numberTextStyle = freezed,
     Object? notchScaleFactor = freezed,
@@ -170,9 +170,9 @@ class __$$_RulerThemeDataCopyWithImpl<$Res>
           ? _value.numberSide
           : numberSide // ignore: cast_nullable_to_non_nullable
               as RulerSide?,
-      base: freezed == base
-          ? _value.base
-          : base // ignore: cast_nullable_to_non_nullable
+      showBase: freezed == showBase
+          ? _value.showBase
+          : showBase // ignore: cast_nullable_to_non_nullable
               as bool?,
       numberSpacing: freezed == numberSpacing
           ? _value.numberSpacing
@@ -204,7 +204,7 @@ class _$_RulerThemeData implements _RulerThemeData {
   _$_RulerThemeData(
       {this.notchSide,
       this.numberSide,
-      this.base,
+      this.showBase,
       this.numberSpacing,
       this.numberTextStyle,
       this.notchScaleFactor,
@@ -222,7 +222,7 @@ class _$_RulerThemeData implements _RulerThemeData {
 
   /// show base at the end of [notchSide]
   @override
-  final bool? base;
+  final bool? showBase;
 
   /// The spacing between the notch and the number.
   @override
@@ -246,7 +246,7 @@ class _$_RulerThemeData implements _RulerThemeData {
 
   @override
   String toString() {
-    return 'RulerThemeData(notchSide: $notchSide, numberSide: $numberSide, base: $base, numberSpacing: $numberSpacing, numberTextStyle: $numberTextStyle, notchScaleFactor: $notchScaleFactor, notchColor: $notchColor, thickness: $thickness)';
+    return 'RulerThemeData(notchSide: $notchSide, numberSide: $numberSide, showBase: $showBase, numberSpacing: $numberSpacing, numberTextStyle: $numberTextStyle, notchScaleFactor: $notchScaleFactor, notchColor: $notchColor, thickness: $thickness)';
   }
 
   @override
@@ -258,7 +258,8 @@ class _$_RulerThemeData implements _RulerThemeData {
                 other.notchSide == notchSide) &&
             (identical(other.numberSide, numberSide) ||
                 other.numberSide == numberSide) &&
-            (identical(other.base, base) || other.base == base) &&
+            (identical(other.showBase, showBase) ||
+                other.showBase == showBase) &&
             (identical(other.numberSpacing, numberSpacing) ||
                 other.numberSpacing == numberSpacing) &&
             (identical(other.numberTextStyle, numberTextStyle) ||
@@ -272,7 +273,7 @@ class _$_RulerThemeData implements _RulerThemeData {
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, notchSide, numberSide, base,
+  int get hashCode => Object.hash(runtimeType, notchSide, numberSide, showBase,
       numberSpacing, numberTextStyle, notchScaleFactor, notchColor, thickness);
 
   @JsonKey(ignore: true)
@@ -286,7 +287,7 @@ abstract class _RulerThemeData implements RulerThemeData {
   factory _RulerThemeData(
       {final RulerSide? notchSide,
       final RulerSide? numberSide,
-      final bool? base,
+      final bool? showBase,
       final double? numberSpacing,
       final TextStyle? numberTextStyle,
       final double? notchScaleFactor,
@@ -305,7 +306,7 @@ abstract class _RulerThemeData implements RulerThemeData {
   @override
 
   /// show base at the end of [notchSide]
-  bool? get base;
+  bool? get showBase;
   @override
 
   /// The spacing between the notch and the number.
