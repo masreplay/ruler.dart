@@ -1,5 +1,5 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/diagnostics.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:ruler/src/async_snapshot.dart';
 import 'package:ruler/src/distance_unit.dart';
@@ -11,7 +11,7 @@ import 'measure_system.dart';
 import 'notch.dart';
 
 /// The type of ruler's notches calculations.
-enum RulerType {
+enum _RulerType {
   /// The NotchData width is calculated based on the available space.
   dynamic,
 
@@ -40,7 +40,7 @@ class Ruler extends StatelessWidget {
     this.showBase,
     this.thickness,
     super.key,
-  })  : _rulerType = RulerType.count,
+  })  : _rulerType = _RulerType.count,
         notchWidth = null;
 
   const Ruler.dynamic(
@@ -55,7 +55,7 @@ class Ruler extends StatelessWidget {
     this.numberSpacing,
     this.thickness,
     super.key,
-  })  : _rulerType = RulerType.dynamic,
+  })  : _rulerType = _RulerType.dynamic,
         notchCount = null;
 
   Ruler.real(
@@ -71,18 +71,18 @@ class Ruler extends StatelessWidget {
     this.showBase,
     this.numberSpacing,
     this.thickness,
-  })  : _rulerType = RulerType.real,
+  })  : _rulerType = _RulerType.real,
         notchWidth = system.toDistanceUnit(graduation),
         notchCount = null;
 
   /// The type of the ruler to be created
-  final RulerType _rulerType;
+  final _RulerType _rulerType;
 
-  /// The notch width in pixels used with [RulerType.dynamic]
+  /// The notch width in pixels used with [_RulerType.dynamic]
   /// the distance type used for graduation only
   final DistanceUnit? notchWidth;
 
-  /// The number of notches used with [RulerType.count]
+  /// The number of notches used with [_RulerType.count]
   final DistanceUnit? notchCount;
 
   /// Used for the numbers
@@ -155,35 +155,37 @@ class Ruler extends StatelessWidget {
             : constraints.maxHeight;
 
         switch (_rulerType) {
-          case RulerType.dynamic:
+          case _RulerType.dynamic:
             return notchWidth!.when(
               cm: (width) {
                 final cmSize = width;
                 final cmCount = mainAxisWidth ~/ cmSize;
-                final extra = mainAxisWidth / cmSize - cmCount;
+                final extraGraduation = mainAxisWidth / cmSize - cmCount;
 
                 return CentimeterRuler(
+                  axis: axis,
                   cmSize: cmSize,
                   cmsCount: cmCount,
-                  extraCm: extra,
-                  axis: axis,
+                  extraCm: extraGraduation,
                 );
               },
               inch: (width, graduations) {
                 final inch = width;
                 final inches = mainAxisWidth ~/ inch;
-                final extra = mainAxisWidth / inch - inches;
+                final extraGraduation = mainAxisWidth / inch - inches;
+
+                print('inches: $extraGraduation');
 
                 return InchesRuler(
+                  axis: axis,
                   graduations: graduations,
                   inchSize: inch,
                   inches: inches,
-                  extraInch: extra,
-                  axis: axis,
+                  extraGraduation: extraGraduation,
                 );
               },
             );
-          case RulerType.count:
+          case _RulerType.count:
             return notchCount!.when(
               cm: (count) {
                 final cmSize = mainAxisWidth / count;
@@ -191,10 +193,10 @@ class Ruler extends StatelessWidget {
                 final extra = count - cmCount;
 
                 return CentimeterRuler(
+                  axis: axis,
                   cmSize: cmSize,
                   cmsCount: cmCount,
                   extraCm: extra,
-                  axis: axis,
                 );
               },
               inch: (double count, int graduations) {
@@ -203,15 +205,15 @@ class Ruler extends StatelessWidget {
                 final extra = count - inches;
 
                 return InchesRuler(
+                  axis: axis,
                   graduations: graduations,
                   inchSize: inch,
                   inches: inches,
-                  extraInch: extra,
-                  axis: axis,
+                  extraGraduation: extra,
                 );
               },
             );
-          case RulerType.real:
+          case _RulerType.real:
             return FutureBuilder(
               future: getInchWidth(context, constraints, axis),
               builder: (context, snapshot) {
@@ -226,10 +228,10 @@ class Ruler extends StatelessWidget {
                         final extra = mm - mm.toInt();
 
                         return CentimeterRuler(
+                          axis: axis,
                           cmSize: inchWidth,
                           cmsCount: mm.toInt(),
                           extraCm: extra,
-                          axis: axis,
                         );
                       },
                       inch: (_, graduation) {
@@ -237,11 +239,11 @@ class Ruler extends StatelessWidget {
                         final extra = inches - inches.toInt();
 
                         return InchesRuler(
+                          axis: axis,
                           inchSize: inchWidth,
                           graduations: graduation,
                           inches: inches.toInt(),
-                          extraInch: extra,
-                          axis: axis,
+                          extraGraduation: extra,
                         );
                       },
                     );
@@ -260,10 +262,10 @@ class Ruler extends StatelessWidget {
 class CentimeterRuler extends StatelessWidget {
   const CentimeterRuler({
     super.key,
+    required this.axis,
     required this.cmsCount,
     required this.cmSize,
     required this.extraCm,
-    required this.axis,
   });
 
   final int cmsCount;
@@ -317,11 +319,11 @@ class CentimeterRuler extends StatelessWidget {
 class InchesRuler extends StatelessWidget {
   const InchesRuler({
     super.key,
+    required this.axis,
     required this.inches,
     required this.inchSize,
-    required this.extraInch,
+    required this.extraGraduation,
     required this.graduations,
-    required this.axis,
   });
 
   final int inches;
@@ -330,7 +332,7 @@ class InchesRuler extends StatelessWidget {
 
   final double inchSize;
 
-  final double extraInch;
+  final double extraGraduation;
 
   final Axis axis;
 
@@ -340,8 +342,8 @@ class InchesRuler extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         ...List.generate(inches, (i) {
-          final showLastPart = i == inches - 1 && extraInch == 0;
-          final bool showLastNumber = i == inches - 1 && extraInch == 0;
+          final showLastPart = i == inches - 1 && extraGraduation == 0;
+          final bool showLastNumber = i == inches - 1 && extraGraduation == 0;
 
           return Notch(
             axis: axis,
@@ -352,11 +354,11 @@ class InchesRuler extends StatelessWidget {
             showLastNumber: showLastNumber,
           );
         }),
-        if (extraInch > 0)
+        if (extraGraduation > 0)
           Notch(
             axis: axis,
-            extraInch.inch(graduations),
-            size: inchSize * extraInch,
+            extraGraduation.inch(graduations),
+            size: inchSize * extraGraduation,
             number: inches,
           ),
       ],
@@ -368,7 +370,7 @@ class InchesRuler extends StatelessWidget {
     super.debugFillProperties(properties);
     properties.add(IntProperty('inches', inches));
     properties.add(DoubleProperty('inchSize', inchSize));
-    properties.add(DoubleProperty('extra', extraInch));
+    properties.add(DoubleProperty('extraGraduation', extraGraduation));
     properties.add(EnumProperty('axis', axis));
     properties.add(IntProperty('graduations', graduations));
   }

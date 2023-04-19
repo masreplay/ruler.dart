@@ -3,7 +3,7 @@ import 'package:ruler/src/distance_unit.dart';
 
 typedef InchWidgetBuilder = Widget Function(
   double inch,
-  int graduation,
+  int graduations,
   int gradsCount,
   double gradSize,
   double extraSize,

@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:ruler/src/axis.dart';
 import 'package:ruler/src/distance_unit.dart';
@@ -10,8 +11,6 @@ import 'notch_builder.dart';
 /// A widget that draws a notch on the ruler with a number
 ///
 /// [distance] define the notches count on the ruler
-///
-/// ![](https://raw.githubusercontent.com/)
 class Notch extends StatelessWidget {
   const Notch(
     this.distance, {
@@ -113,7 +112,7 @@ class Notch extends StatelessWidget {
               SizedBoxFlex(
                 axis: axis,
                 x: mmSize,
-                child: Graduation(
+                child: _Graduation(
                   axis: axis,
                   size: mmSize,
                   length: getNotchLength(i),
@@ -128,11 +127,11 @@ class Notch extends StatelessWidget {
           ],
         );
       },
-      inchBuilder: (inch, graduation, gradsCount, gradSize, extraSize) {
+      inchBuilder: (inch, graduations, gradsCount, gradSize, extraSize) {
         double getNotchLength(int position) {
-          if (position == 0 || position == graduation) {
+          if (position == 0 || position == graduations) {
             return 20.0 * notchScaleFactor;
-          } else if (position == graduation / 2) {
+          } else if (position == graduations / 2) {
             return 15.0 * notchScaleFactor;
           } else {
             return 10.0 * notchScaleFactor;
@@ -147,12 +146,12 @@ class Notch extends StatelessWidget {
               SizedBoxFlex(
                 axis: axis,
                 x: gradSize,
-                child: Graduation(
+                child: _Graduation(
                   axis: axis,
                   size: gradSize,
                   length: getNotchLength(i),
                   otherLength: getNotchLength(i + 1),
-                  showOther: i == graduation - 1 && showLastPart,
+                  showOther: i == graduations - 1 && showLastPart,
                   thickness: thickness,
                   side: notchSide,
                   color: notchColor,
@@ -198,11 +197,33 @@ class Notch extends StatelessWidget {
       ),
     );
   }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(EnumProperty<Axis>('axis', axis));
+    properties.add(DoubleProperty('size', size));
+    properties.add(DoubleProperty('numberSpacing', numberSpacing));
+    properties.add(DoubleProperty('distance', distance.value));
+    properties.add(IntProperty('number', number));
+    properties.add(FlagProperty('showLastNumber',
+        value: showLastNumber, ifTrue: 'showLastNumber'));
+    properties.add(FlagProperty('showLastPart',
+        value: showLastPart, ifTrue: 'showLastPart'));
+    properties.add(EnumProperty<RulerSide>('notchSide', notchSide));
+    properties.add(EnumProperty<RulerSide>('numberSide', numberSide));
+    properties
+        .add(FlagProperty('showBase', value: showBase, ifTrue: 'showBase'));
+    properties.add(ColorProperty('notchColor', notchColor));
+    properties.add(DoubleProperty('notchScaleFactor', notchScaleFactor));
+    properties.add(
+        DiagnosticsProperty<TextStyle>('numberTextStyle', numberTextStyle));
+    properties.add(DoubleProperty('thickness', thickness));
+  }
 }
 
-class Graduation extends StatelessWidget {
-  const Graduation({
-    super.key,
+class _Graduation extends StatelessWidget {
+  const _Graduation({
     required this.axis,
     required this.size,
     required this.length,
