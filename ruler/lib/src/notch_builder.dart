@@ -16,6 +16,12 @@ typedef CMWidgetBuilder = Widget Function(
   double extraSize,
 );
 
+/// Builds a notch depending on the unit of measurement [DistanceUnit]
+///
+/// [distance] is the distance to be measured
+/// [size] is the width for [Axis.horizontal] and height for [Axis.vertical]
+/// [inchBuilder] with [Inch] unit of measurement
+/// [cmBuilder] with [CM] unit of measurement
 class NotchBuilder extends StatelessWidget {
   const NotchBuilder({
     super.key,
@@ -53,6 +59,7 @@ class NotchBuilder extends StatelessWidget {
     }
   }
 
+  /// Builds the distance builder depending on the unit of measurement
   Widget buildDistance(double size) {
     return distance.when(
       cm: (double cm) {

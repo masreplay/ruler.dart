@@ -33,7 +33,7 @@ class HomePage extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           // Ruler.dynamic((MediaQuery.of(context).size.width + 1).inch(10)),
-          Notch(0.9977728285077951.inch(10))
+          Notch((9.99 / 10).inch(10))
           // Ruler.count(3.cm, notchScaleFactor: 4),
           // Ruler.count(10.cm),
           // Ruler.dynamic(190.cm),

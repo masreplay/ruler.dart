@@ -151,7 +151,7 @@ class Notch extends StatelessWidget {
                   size: gradSize,
                   length: getNotchLength(i),
                   otherLength: getNotchLength(i + 1),
-                  showOther: i == graduations - 1 && showLastPart,
+                  showOther: i == gradsCount - 1 && showLastPart,
                   thickness: thickness,
                   side: notchSide,
                   color: notchColor,
