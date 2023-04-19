@@ -3,7 +3,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'distance_unit.freezed.dart';
 part 'distance_unit.g.dart';
 
-const int defaultGraduation = 8;
+const int defaultGraduations = 8;
 
 /// represent a distance in millimeters, centimeters or inches
 @freezed
@@ -11,11 +11,11 @@ class DistanceUnit with _$DistanceUnit {
   const DistanceUnit._();
 
   const factory DistanceUnit.cm(double value) = Centimeter;
-  // assert graduation is even and greater than 8 and less than or 100
-  @Assert('graduation % 2 == 0 && graduation >= 8 && graduation <= 100')
+  // assert graduations is even and greater than 8 and less than or 100
+  @Assert('graduations % 2 == 0 && graduations >= 8 && graduations <= 100')
   const factory DistanceUnit.inch(
     double value, {
-    @Default(defaultGraduation) int graduation,
+    @Default(defaultGraduations) int graduations,
   }) = Inch;
 
   DistanceUnit operator /(double value) {
@@ -48,9 +48,9 @@ extension DistanceUnitConvertorDouble on num {
 
   Centimeter get cm => Centimeter(toDouble());
 
-  Inch inch([int graduation = defaultGraduation]) =>
-      Inch(toDouble(), graduation: graduation);
+  Inch inch([int graduations = defaultGraduations]) =>
+      Inch(toDouble(), graduations: graduations);
 
-  Inch inchGrad(int graduation) =>
-      Inch(this / graduation, graduation: graduation);
+  Inch inchGrad(int graduations) =>
+      Inch(this / graduations, graduations: graduations);
 }

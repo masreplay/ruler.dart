@@ -33,19 +33,19 @@ mixin _$DistanceUnit {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(double value) cm,
-    required TResult Function(double value, int graduation) inch,
+    required TResult Function(double value, int graduations) inch,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(double value)? cm,
-    TResult? Function(double value, int graduation)? inch,
+    TResult? Function(double value, int graduations)? inch,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(double value)? cm,
-    TResult Function(double value, int graduation)? inch,
+    TResult Function(double value, int graduations)? inch,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -183,7 +183,7 @@ class _$Centimeter extends Centimeter {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(double value) cm,
-    required TResult Function(double value, int graduation) inch,
+    required TResult Function(double value, int graduations) inch,
   }) {
     return cm(value);
   }
@@ -192,7 +192,7 @@ class _$Centimeter extends Centimeter {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(double value)? cm,
-    TResult? Function(double value, int graduation)? inch,
+    TResult? Function(double value, int graduations)? inch,
   }) {
     return cm?.call(value);
   }
@@ -201,7 +201,7 @@ class _$Centimeter extends Centimeter {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(double value)? cm,
-    TResult Function(double value, int graduation)? inch,
+    TResult Function(double value, int graduations)? inch,
     required TResult orElse(),
   }) {
     if (cm != null) {
@@ -270,7 +270,7 @@ abstract class _$$InchCopyWith<$Res> implements $DistanceUnitCopyWith<$Res> {
       __$$InchCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({double value, int graduation});
+  $Res call({double value, int graduations});
 }
 
 /// @nodoc
@@ -284,16 +284,16 @@ class __$$InchCopyWithImpl<$Res>
   @override
   $Res call({
     Object? value = null,
-    Object? graduation = null,
+    Object? graduations = null,
   }) {
     return _then(_$Inch(
       null == value
           ? _value.value
           : value // ignore: cast_nullable_to_non_nullable
               as double,
-      graduation: null == graduation
-          ? _value.graduation
-          : graduation // ignore: cast_nullable_to_non_nullable
+      graduations: null == graduations
+          ? _value.graduations
+          : graduations // ignore: cast_nullable_to_non_nullable
               as int,
     ));
   }
@@ -303,8 +303,8 @@ class __$$InchCopyWithImpl<$Res>
 @JsonSerializable()
 class _$Inch extends Inch {
   const _$Inch(this.value,
-      {this.graduation = defaultGraduation, final String? $type})
-      : assert(graduation % 2 == 0 && graduation >= 8 && graduation <= 100),
+      {this.graduations = defaultGraduations, final String? $type})
+      : assert(graduations % 2 == 0 && graduations >= 8 && graduations <= 100),
         $type = $type ?? 'inch',
         super._();
 
@@ -314,14 +314,14 @@ class _$Inch extends Inch {
   final double value;
   @override
   @JsonKey()
-  final int graduation;
+  final int graduations;
 
   @JsonKey(name: 'runtimeType')
   final String $type;
 
   @override
   String toString() {
-    return 'DistanceUnit.inch(value: $value, graduation: $graduation)';
+    return 'DistanceUnit.inch(value: $value, graduations: $graduations)';
   }
 
   @override
@@ -330,13 +330,13 @@ class _$Inch extends Inch {
         (other.runtimeType == runtimeType &&
             other is _$Inch &&
             (identical(other.value, value) || other.value == value) &&
-            (identical(other.graduation, graduation) ||
-                other.graduation == graduation));
+            (identical(other.graduations, graduations) ||
+                other.graduations == graduations));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, value, graduation);
+  int get hashCode => Object.hash(runtimeType, value, graduations);
 
   @JsonKey(ignore: true)
   @override
@@ -348,29 +348,29 @@ class _$Inch extends Inch {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(double value) cm,
-    required TResult Function(double value, int graduation) inch,
+    required TResult Function(double value, int graduations) inch,
   }) {
-    return inch(value, graduation);
+    return inch(value, graduations);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(double value)? cm,
-    TResult? Function(double value, int graduation)? inch,
+    TResult? Function(double value, int graduations)? inch,
   }) {
-    return inch?.call(value, graduation);
+    return inch?.call(value, graduations);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(double value)? cm,
-    TResult Function(double value, int graduation)? inch,
+    TResult Function(double value, int graduations)? inch,
     required TResult orElse(),
   }) {
     if (inch != null) {
-      return inch(value, graduation);
+      return inch(value, graduations);
     }
     return orElse();
   }
@@ -415,14 +415,14 @@ class _$Inch extends Inch {
 }
 
 abstract class Inch extends DistanceUnit {
-  const factory Inch(final double value, {final int graduation}) = _$Inch;
+  const factory Inch(final double value, {final int graduations}) = _$Inch;
   const Inch._() : super._();
 
   factory Inch.fromJson(Map<String, dynamic> json) = _$Inch.fromJson;
 
   @override
   double get value;
-  int get graduation;
+  int get graduations;
   @override
   @JsonKey(ignore: true)
   _$$InchCopyWith<_$Inch> get copyWith => throw _privateConstructorUsedError;

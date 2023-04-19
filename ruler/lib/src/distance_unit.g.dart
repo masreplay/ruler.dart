@@ -19,12 +19,12 @@ Map<String, dynamic> _$$CentimeterToJson(_$Centimeter instance) =>
 
 _$Inch _$$InchFromJson(Map<String, dynamic> json) => _$Inch(
       (json['value'] as num).toDouble(),
-      graduation: json['graduation'] as int? ?? defaultGraduation,
+      graduations: json['graduations'] as int? ?? defaultGraduations,
       $type: json['runtimeType'] as String?,
     );
 
 Map<String, dynamic> _$$InchToJson(_$Inch instance) => <String, dynamic>{
       'value': instance.value,
-      'graduation': instance.graduation,
+      'graduations': instance.graduations,
       'runtimeType': instance.$type,
     };

@@ -144,13 +144,16 @@ class Ruler extends StatelessWidget {
     return RulerTheme(
       data: rulerThemeMerged,
       child: LayoutBuilder(builder: (context, constraints) {
+        final mainAxisWidth = axis == Axis.horizontal
+            ? constraints.maxWidth
+            : constraints.maxHeight;
         switch (_rulerType) {
           case RulerType.dynamic:
             return notchWidth!.when(
               cm: (width) {
                 final cmSize = width;
-                final cmCount = constraints.maxWidth ~/ cmSize;
-                final extra = constraints.maxWidth / cmSize - cmCount;
+                final cmCount = mainAxisWidth ~/ cmSize;
+                final extra = mainAxisWidth / cmSize - cmCount;
 
                 return CentimeterRuler(
                   cmSize: cmSize,
@@ -161,10 +164,11 @@ class Ruler extends StatelessWidget {
               },
               inch: (width, graduation) {
                 final inch = width;
-                final inches = constraints.maxWidth ~/ inch;
-                final extra = constraints.maxWidth / inch - inches;
+                final inches = mainAxisWidth ~/ inch;
+                final extra = mainAxisWidth / inch - inches;
 
                 return InchesRuler(
+                  graduations: graduation,
                   inchSize: inch,
                   inches: inches,
                   extra: extra,
@@ -175,7 +179,7 @@ class Ruler extends StatelessWidget {
           case RulerType.count:
             return notchCount!.when(
               cm: (count) {
-                final cmSize = constraints.maxWidth / count;
+                final cmSize = mainAxisWidth / count;
                 final cmCount = count.toInt();
                 final extra = count - cmCount;
 
@@ -187,11 +191,12 @@ class Ruler extends StatelessWidget {
                 );
               },
               inch: (double count, int graduation) {
-                final inch = constraints.maxWidth / count;
+                final inch = mainAxisWidth / count;
                 final inches = count.toInt();
                 final extra = count - inches;
 
                 return InchesRuler(
+                  graduations: graduation,
                   inchSize: inch,
                   inches: inches,
                   extra: extra,
@@ -205,25 +210,28 @@ class Ruler extends StatelessWidget {
               builder: (context, snapshot) {
                 return snapshot.maybeWhen(
                   orElse: SizedBox.shrink,
-                  data: (inch) {
-                    return notchWidth!.when(
+                  data: (inchWidth) {
+                    final notchType = notchWidth!;
+
+                    return notchType.when(
                       cm: (_) {
-                        final mm = constraints.maxWidth / inch * 25.4;
+                        final mm = mainAxisWidth / inchWidth * 25.4;
                         final extra = mm - mm.toInt();
 
                         return CentimeterRuler(
-                          cmSize: inch,
+                          cmSize: inchWidth,
                           cmsCount: mm.toInt(),
                           extraCm: extra,
                           axis: axis,
                         );
                       },
                       inch: (_, graduation) {
-                        final inches = constraints.maxWidth / inch;
+                        final inches = mainAxisWidth / inchWidth;
                         final extra = inches - inches.toInt();
 
                         return InchesRuler(
-                          inchSize: inch,
+                          inchSize: inchWidth,
+                          graduations: graduation,
                           inches: inches.toInt(),
                           extra: extra,
                           axis: axis,
@@ -295,9 +303,12 @@ class InchesRuler extends StatelessWidget {
     required this.inchSize,
     required this.extra,
     required this.axis,
+    required this.graduations,
   });
 
   final int inches;
+
+  final int graduations;
 
   final double inchSize;
 
@@ -311,24 +322,24 @@ class InchesRuler extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         ...List.generate(inches, (i) {
-          final showLastPart = i == inches - 1 && extra > 0;
+          final showLastPart = i == inches - 1 && extra == 0;
+          final bool showLastNumber = i == inches - 1 && extra == 0;
+
           return Notch(
-            1.inch(),
-            size: inchSize,
             axis: axis,
+            1.inch(graduations),
+            size: inchSize,
             number: i,
             showLastPart: showLastPart,
-            showLastNumber: false,
+            showLastNumber: showLastNumber,
           );
         }),
         if (extra > 0)
           Notch(
-            extra.inch(),
-            size: inchSize * extra,
             axis: axis,
+            extra.inch(graduations),
+            size: inchSize * extra,
             number: inches,
-            showLastPart: true,
-            showLastNumber: true,
           ),
       ],
     );

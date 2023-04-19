@@ -9,7 +9,7 @@ enum MeasureSystem {
       case MeasureSystem.metric:
         return 1.cm;
       case MeasureSystem.imperial:
-        return 1.inch();
+        return 1.inch(graduation);
     }
   }
 }
