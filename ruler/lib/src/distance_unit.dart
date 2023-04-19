@@ -5,7 +5,7 @@ part 'distance_unit.g.dart';
 
 const int defaultGraduations = 8;
 
-/// represent a distance in millimeters, centimeters or inches
+/// Represent a distance in millimeters, centimeters or inches
 @freezed
 class DistanceUnit with _$DistanceUnit {
   const DistanceUnit._();
@@ -44,13 +44,18 @@ class DistanceUnit with _$DistanceUnit {
 }
 
 extension DistanceUnitConvertorDouble on num {
+  /// Convert a double of mm to a [DistanceUnit] of [Centimeter]
   Centimeter get mm => Centimeter(this / 10);
 
+  /// Representation of a [DistanceUnit] of [Centimeter]
   Centimeter get cm => Centimeter(toDouble());
 
+  /// Representation of a [DistanceUnit] of [Inch]
   Inch inch([int graduations = defaultGraduations]) =>
       Inch(toDouble(), graduations: graduations);
 
-  Inch inchGrad(int graduations) =>
+  /// Representation of number graduation parts a [DistanceUnit] of [Inch]
+  /// For example 2.inchGraduation(8) is equal to 2/8 inch
+  Inch inchGraduation(int graduations) =>
       Inch(this / graduations, graduations: graduations);
 }

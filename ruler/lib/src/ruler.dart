@@ -9,7 +9,7 @@ import 'inch.dart';
 import 'measure_system.dart';
 import 'notch.dart';
 
-/// The NotchData width calculation.
+/// The type of ruler's notches calculations.
 enum RulerType {
   /// The NotchData width is calculated based on the available space.
   dynamic,
@@ -21,6 +21,11 @@ enum RulerType {
   real,
 }
 
+/// A widget that displays a ruler in imperial or metric units.
+///
+/// [Ruler.count] is used to display a ruler with a fixed number of notches and defined by the [notchCount] parameter.
+/// [Ruler.dynamic] is used to display a ruler with a fixed width in pixels and defined by the [notchWidth] parameter.
+/// [Ruler.real] is used to display a ruler with a fixed width in pixels and defined by the [notchWidth] parameter.
 class Ruler extends StatelessWidget {
   const Ruler.count(
     DistanceUnit this.notchCount, {
@@ -147,6 +152,7 @@ class Ruler extends StatelessWidget {
         final mainAxisWidth = axis == Axis.horizontal
             ? constraints.maxWidth
             : constraints.maxHeight;
+
         switch (_rulerType) {
           case RulerType.dynamic:
             return notchWidth!.when(
@@ -162,13 +168,13 @@ class Ruler extends StatelessWidget {
                   axis: axis,
                 );
               },
-              inch: (width, graduation) {
+              inch: (width, graduations) {
                 final inch = width;
                 final inches = mainAxisWidth ~/ inch;
                 final extra = mainAxisWidth / inch - inches;
 
                 return InchesRuler(
-                  graduations: graduation,
+                  graduations: graduations,
                   inchSize: inch,
                   inches: inches,
                   extra: extra,
@@ -190,13 +196,13 @@ class Ruler extends StatelessWidget {
                   axis: axis,
                 );
               },
-              inch: (double count, int graduation) {
+              inch: (double count, int graduations) {
                 final inch = mainAxisWidth / count;
                 final inches = count.toInt();
                 final extra = count - inches;
 
                 return InchesRuler(
-                  graduations: graduation,
+                  graduations: graduations,
                   inchSize: inch,
                   inches: inches,
                   extra: extra,
@@ -248,6 +254,7 @@ class Ruler extends StatelessWidget {
   }
 }
 
+/// A widget that displays a ruler with centimeters
 @internal
 class CentimeterRuler extends StatelessWidget {
   const CentimeterRuler({
@@ -295,6 +302,7 @@ class CentimeterRuler extends StatelessWidget {
   }
 }
 
+/// A widget that displays a ruler with inches.
 @internal
 class InchesRuler extends StatelessWidget {
   const InchesRuler({
