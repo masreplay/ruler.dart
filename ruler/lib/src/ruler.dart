@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/src/foundation/diagnostics.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:ruler/src/async_snapshot.dart';
 import 'package:ruler/src/distance_unit.dart';
@@ -177,7 +178,7 @@ class Ruler extends StatelessWidget {
                   graduations: graduations,
                   inchSize: inch,
                   inches: inches,
-                  extra: extra,
+                  extraInch: extra,
                   axis: axis,
                 );
               },
@@ -205,7 +206,7 @@ class Ruler extends StatelessWidget {
                   graduations: graduations,
                   inchSize: inch,
                   inches: inches,
-                  extra: extra,
+                  extraInch: extra,
                   axis: axis,
                 );
               },
@@ -239,7 +240,7 @@ class Ruler extends StatelessWidget {
                           inchSize: inchWidth,
                           graduations: graduation,
                           inches: inches.toInt(),
-                          extra: extra,
+                          extraInch: extra,
                           axis: axis,
                         );
                       },
@@ -300,6 +301,15 @@ class CentimeterRuler extends StatelessWidget {
       ],
     );
   }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(IntProperty('cmsCount', cmsCount));
+    properties.add(DoubleProperty('cmSize', cmSize));
+    properties.add(DoubleProperty('extraCm', extraCm));
+    properties.add(EnumProperty('axis', axis));
+  }
 }
 
 /// A widget that displays a ruler with inches.
@@ -309,9 +319,9 @@ class InchesRuler extends StatelessWidget {
     super.key,
     required this.inches,
     required this.inchSize,
-    required this.extra,
-    required this.axis,
+    required this.extraInch,
     required this.graduations,
+    required this.axis,
   });
 
   final int inches;
@@ -320,7 +330,7 @@ class InchesRuler extends StatelessWidget {
 
   final double inchSize;
 
-  final double extra;
+  final double extraInch;
 
   final Axis axis;
 
@@ -330,8 +340,8 @@ class InchesRuler extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         ...List.generate(inches, (i) {
-          final showLastPart = i == inches - 1 && extra == 0;
-          final bool showLastNumber = i == inches - 1 && extra == 0;
+          final showLastPart = i == inches - 1 && extraInch == 0;
+          final bool showLastNumber = i == inches - 1 && extraInch == 0;
 
           return Notch(
             axis: axis,
@@ -342,14 +352,24 @@ class InchesRuler extends StatelessWidget {
             showLastNumber: showLastNumber,
           );
         }),
-        if (extra > 0)
+        if (extraInch > 0)
           Notch(
             axis: axis,
-            extra.inch(graduations),
-            size: inchSize * extra,
+            extraInch.inch(graduations),
+            size: inchSize * extraInch,
             number: inches,
           ),
       ],
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(IntProperty('inches', inches));
+    properties.add(DoubleProperty('inchSize', inchSize));
+    properties.add(DoubleProperty('extra', extraInch));
+    properties.add(EnumProperty('axis', axis));
+    properties.add(IntProperty('graduations', graduations));
   }
 }
