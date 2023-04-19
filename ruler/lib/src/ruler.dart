@@ -13,6 +13,7 @@ import 'notch.dart';
 /// The type of ruler's notches calculations.
 enum _RulerType {
   /// The NotchData width is calculated based on the available space.
+  /// 100 pixel each cm width
   dynamic,
 
   /// The NotchData width is calculated based on the count.
@@ -58,8 +59,8 @@ class Ruler extends StatelessWidget {
   })  : _rulerType = _RulerType.dynamic,
         notchCount = null;
 
-  Ruler.real(
-    MeasureSystem system, {
+  Ruler.real({
+    MeasureSystem system = MeasureSystem.metric,
     int graduation = 8,
     super.key,
     this.axis = Axis.horizontal,
@@ -170,6 +171,15 @@ class Ruler extends StatelessWidget {
                 );
               },
               inch: (width, graduations) {
+                if (mainAxisWidth < width) {
+                  // TODO(masreplay): throw an error
+                }
+
+                if (mainAxisWidth == double.infinity ||
+                    mainAxisWidth == double.nan) {
+                  throw Exception('The width is infinite or NaN');
+                }
+
                 final inch = width;
                 final inches = mainAxisWidth ~/ inch;
                 final extraGraduation = mainAxisWidth / inch - inches;
@@ -224,13 +234,14 @@ class Ruler extends StatelessWidget {
 
                     return notchType.when(
                       cm: (_) {
-                        final mm = mainAxisWidth / inchWidth * 25.4;
-                        final extra = mm - mm.toInt();
+                        final cmWidth = inchWidth / 2.54;
+                        final cmCount = mainAxisWidth ~/ cmWidth;
+                        final extra = mainAxisWidth / cmWidth - cmCount;
 
                         return CentimeterRuler(
                           axis: axis,
-                          cmSize: inchWidth,
-                          cmsCount: mm.toInt(),
+                          cmSize: cmWidth,
+                          cmsCount: cmCount,
                           extraCm: extra,
                         );
                       },

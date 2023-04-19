@@ -1,5 +1,6 @@
 import 'package:ruler/ruler.dart';
 
+/// The measure system used to display the ruler.
 enum MeasureSystem {
   metric,
   imperial;
