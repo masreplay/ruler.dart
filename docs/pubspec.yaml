@@ -30,6 +30,10 @@ dev_dependencies:
   freezed: ^2.3.2
   grinder: ^0.9.3
   json_serializable: ^6.6.1
+  
+  args: 
+  string_scanner: 
+  path: 
 
 flutter:
   uses-material-design: true

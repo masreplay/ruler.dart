@@ -18,7 +18,7 @@ class ImageData {
 Future<String> buildMarkdown(Documentation doc) async {
   return doc.map(
     text: (value) {
-      return value.text;
+      return value.toMarkdown();
     },
     assetsImage: (value) {
       return "";
@@ -46,6 +46,9 @@ Future<String> buildMarkdown(Documentation doc) async {
       buffer.writeln("</table>");
 
       return buffer.toString();
+    },
+    textTable: (DocumentationTextTable value) {
+      return "";
     },
   );
 }

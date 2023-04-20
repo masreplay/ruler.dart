@@ -18,7 +18,7 @@ packages:
     source: hosted
     version: "5.10.0"
   args:
-    dependency: transitive
+    dependency: "direct dev"
     description:
       name: args
       sha256: "4cab82a83ffef80b262ddedf47a0a8e56ee6fbf7fe21e6e768b02792034dd440"
@@ -441,7 +441,7 @@ packages:
     source: hosted
     version: "2.1.0"
   path:
-    dependency: transitive
+    dependency: "direct dev"
     description:
       name: path
       sha256: db9d4f58c908a4ba5953fcee2ae317c94889433e5024c27ce74a37f94267945b
@@ -621,7 +621,7 @@ packages:
     source: hosted
     version: "2.1.0"
   string_scanner:
-    dependency: transitive
+    dependency: "direct dev"
     description:
       name: string_scanner
       sha256: "556692adab6cfa87322a115640c11f13cb77b3f076ddcc5d6ae3c20242bedcde"

@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:ruler/ruler.dart';
 
 import 'build_docs.dart';
 import 'demos/documentations.dart';
@@ -43,11 +44,24 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text("Ruler")),
-      body: FilledButton(
-        onPressed: () {
-          buildDocumentations();
-        },
-        child: const Text("Build"),
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Ruler.dynamic(
+            100.cm,
+            notchSide: RulerSide.end,
+            textSide: RulerSide.start,
+          ),
+          Container(
+            height: 100,
+            width: 100,
+            color: Colors.red,
+          ),
+          Ruler.dynamic(
+            100.cm,
+            notchSide: RulerSide.start,
+          ),
+        ],
       ),
     );
   }

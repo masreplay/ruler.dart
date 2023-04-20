@@ -18,13 +18,6 @@ class DistanceUnit with _$DistanceUnit {
     @Default(defaultGraduations) int graduations,
   }) = Inch;
 
-  DistanceUnit operator /(double value) {
-    return when(
-      cm: (value) => Centimeter(value / value),
-      inch: (value, _) => Inch(value / value),
-    );
-  }
-
   Centimeter get cm {
     return when(
       cm: (value) => Centimeter(value),
@@ -37,6 +30,17 @@ class DistanceUnit with _$DistanceUnit {
       inch: (value, _) => Inch(value),
       cm: (value) => Inch(value / 2.54),
     );
+  }
+
+  DistanceUnit operator /(double value) {
+    return when(
+      cm: (value) => Centimeter(value / value),
+      inch: (value, _) => Inch(value / value),
+    );
+  }
+
+  static Inch toInch(double cm) {
+    return Inch(cm * 2.54);
   }
 
   factory DistanceUnit.fromJson(Map<String, dynamic> json) =>

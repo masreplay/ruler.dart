@@ -9,38 +9,60 @@ List<Documentation> getDocumentations(BuildContext context) {
       f(context).toPlainText().trim();
 
   return [
+    const Documentation.text("Ruler", size: TextSize.heading1),
     const Documentation.text(
-      "Real Ruler with notches supports both metric and imperial units.",
+      "A ruler is a widget that displays a ruler with a given distance in cm or inches",
+      size: TextSize.paragraph,
+    ),
+    const Documentation.text("Overview", size: TextSize.heading2),
+    const Documentation.text(
+      "A ruler is a widget that displays a ruler with a given distance in cm or inches",
+      size: TextSize.paragraph,
+    ),
+    Documentation.widget(
+      name: 'double_sided',
+      description: "Double-sided ruler",
+      code: "code",
+      widget: Column(
+        children: [
+          Ruler.count(1.cm),
+          Ruler.count(1.cm),
+        ],
+      ),
     ),
     Documentation.widgetsTable(
       widgets: [
         DocumentationWidget(
-            description: "Ruler.count fit the given distance to the width",
-            code: code(CodeSegments.count),
-            widget:
-                // BEGIN count
-                Ruler.count(3.cm)
-            // END
-            ),
+          name: "ruler_count",
+          description: "Ruler.count fit the given distance to the width",
+          code: code(CodeSegments.count),
+          widget:
+              // BEGIN count
+              Ruler.count(3.cm),
+          // END
+        ),
         DocumentationWidget(
+            name: "ruler_dynamic",
             description:
-                "Ruler.dynamic create n of notches depending on the width",
+                "Ruler.dynamic is used to display a ruler with a fixed width in pixels for notch",
             code: code(CodeSegments.dynamic),
             widget:
                 // BEGIN dynamic
-                Ruler.dynamic(3.cm)
+                Ruler.dynamic(300.cm)
             // END
             ),
         DocumentationWidget(
+            name: "ruler_real",
             description:
                 "Ruler.real create an in real life ruler equivalent to real cm or inches",
             code: code(CodeSegments.real),
             widget:
                 // BEGIN real
-                Ruler.real(MeasureSystem.imperial)
+                Ruler.count(1.cm)
             // END
             ),
         DocumentationWidget(
+            name: "notch_color",
             description: "Change color notches color",
             code: code(CodeSegments.notchColor),
             widget:
@@ -49,6 +71,7 @@ List<Documentation> getDocumentations(BuildContext context) {
             // END
             ),
         DocumentationWidget(
+            name: "axis",
             description: "Change axis to vertical or horizontal",
             code: code(CodeSegments.axis),
             widget:
