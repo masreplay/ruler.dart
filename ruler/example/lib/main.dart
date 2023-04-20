@@ -26,39 +26,67 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const padding = SizedBox(height: 20);
+    const padding = SizedBox.square(dimension: 48);
+
+    final cms = 0.9.cm;
+
     return Scaffold(
       appBar: AppBar(title: const Text("Rulers")),
       body: Column(
         children: [
           /// 10 centimeters
-          Ruler.count(10.cm),
+          // Ruler.count(0.05.cm),
+
+          Ruler.count(cms),
+          Expanded(
+            child: Ruler.count(
+              cms,
+              axis: Axis.vertical,
+            ),
+          ),
 
           /// 5 inches and 10 graduations per inch
-          Ruler.count(5.inch(10)),
+          // Ruler.count(5.1.inch(10)),
 
+          // padding,
+
+          // padding,
           // 24 graduation of inch with 8 graduations
-          Ruler.count(24.inchGraduation(8)),
+          // Ruler.count(16.9.inchGraduation(8)),
 
+          // padding,
+          // Ruler.count(1.inchGraduation(8)),
+
+          // padding,
           // 100 pixel each cm width
-          Ruler.dynamic(100.cm),
+          // Ruler.dynamic(100.cm),
 
+          // padding,
           // cm equalivlaint to real life ruler's cm
-          Ruler.real(system: MeasureSystem.metric),
+          // Ruler.real(system: MeasureSystem.metric),
 
-          padding,
+          // padding,
+          // DynamicDoubleSidedRuler(
+          //   cmWidth: 100,
+          //   child: Container(
+          //     width: 100,
+          //     height: 100,
+          //     color: Colors.red,
+          //   ),
+          // ),
 
-          Expanded(
-            child: DynamicDoubleSidedRuler(
-              cmWidth: 100,
-              rulersAxis: Axis.vertical,
-              child: Container(
-                width: 100,
-                height: 100,
-                color: Colors.red,
-              ),
-            ),
-          )
+          // padding,
+          // Expanded(
+          //   child: DynamicDoubleSidedRuler(
+          //     cmWidth: 100,
+          //     rulersAxis: Axis.vertical,
+          //     child: Container(
+          //       width: 100,
+          //       height: 100,
+          //       color: Colors.red,
+          //     ),
+          //   ),
+          // )
         ],
       ),
     );

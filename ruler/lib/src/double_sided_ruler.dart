@@ -30,14 +30,14 @@ class DynamicDoubleSidedRuler extends StatelessWidget {
           cmWidth.cm,
           axis: rulersAxis,
           notchSide: RulerSide.end,
-          textSide: RulerSide.start,
+          numberSide: RulerSide.start,
         ),
         child,
         Ruler.dynamic(
           DistanceUnit.toInch(cmWidth),
           axis: rulersAxis,
           notchSide: RulerSide.start,
-          textSide: RulerSide.end,
+          numberSide: RulerSide.end,
         ),
       ],
     );

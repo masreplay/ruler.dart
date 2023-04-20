@@ -4,12 +4,12 @@ class SizedBoxFlex extends SizedBox {
   const SizedBoxFlex({
     super.key,
     required Axis axis,
-    double? x,
-    double? y,
+    double? width,
+    double? length,
     super.child,
   }) : super(
-          width: axis == Axis.horizontal ? x : null,
-          height: axis == Axis.vertical ? x : null,
+          width: axis == Axis.horizontal ? width : null,
+          height: axis == Axis.vertical ? width : null,
         );
 }
 

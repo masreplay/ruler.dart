@@ -111,7 +111,7 @@ class Notch extends StatelessWidget {
             for (var i = 0; i < mmsCount; i++)
               SizedBoxFlex(
                 axis: axis,
-                x: mmSize,
+                width: mmSize,
                 child: _Graduation(
                   axis: axis,
                   size: mmSize,
@@ -123,11 +123,29 @@ class Notch extends StatelessWidget {
                   color: notchColor,
                 ),
               ),
-            if (extraSize > 0) SizedBoxFlex(axis: axis, x: extraSize, y: 20.0),
+            if (extraSize > 0)
+              SizedBoxFlex(
+                axis: axis,
+                width: extraSize,
+                child: cm > 0.1
+                    ? null
+                    : _Graduation(
+                        axis: axis,
+                        size: extraSize,
+                        thickness: thickness,
+                        side: notchSide,
+                        color: notchColor,
+                        length: getNotchLength(0),
+                        otherLength: getNotchLength(1),
+                        showOther: false,
+                      ),
+              ),
           ],
         );
       },
-      inchBuilder: (inch, graduations, gradsCount, gradSize, extraSize) {
+      inchBuilder:
+          (inch, graduations, gradsCount, graduationWidth, extraWidth) {
+        print(extraWidth);
         double getNotchLength(int position) {
           if (position == 0 || position == graduations) {
             return 20.0 * notchScaleFactor;
@@ -145,10 +163,10 @@ class Notch extends StatelessWidget {
             for (var i = 0; i < gradsCount; i++)
               SizedBoxFlex(
                 axis: axis,
-                x: gradSize,
+                width: graduationWidth,
                 child: _Graduation(
                   axis: axis,
-                  size: gradSize,
+                  size: graduationWidth,
                   length: getNotchLength(i),
                   otherLength: getNotchLength(i + 1),
                   showOther: i == gradsCount - 1 && showLastPart,
@@ -157,24 +175,42 @@ class Notch extends StatelessWidget {
                   color: notchColor,
                 ),
               ),
-            if (extraSize > 0) SizedBoxFlex(axis: axis, x: extraSize, y: 20.0),
+            if (extraWidth > 0)
+              SizedBoxFlex(
+                axis: axis,
+                width: extraWidth,
+                child: inch > 0.1
+                    ? null
+                    : _Graduation(
+                        axis: axis,
+                        size: extraWidth,
+                        thickness: thickness,
+                        side: notchSide,
+                        color: notchColor,
+                        length: getNotchLength(0),
+                        otherLength: getNotchLength(1),
+                        showOther: false,
+                      ),
+              ),
           ],
         );
       },
     );
 
-    final text = [
-      SizedBox.square(dimension: numberSpacing),
-      if (number != null)
-        Flex(
-          direction: axis,
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text("${number!}", style: numberTextStyle),
-            if (showLastNumber) Text("${number! + 1}", style: numberTextStyle),
-          ],
-        ),
-    ];
+    final text = number == null
+        ? []
+        : [
+            SizedBox.square(dimension: numberSpacing),
+            Flex(
+              direction: axis,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text("${number!}", style: numberTextStyle),
+                if (showLastNumber)
+                  Text("${number! + 1}", style: numberTextStyle),
+              ],
+            ),
+          ];
 
     final baseWidget = Container(
       width: axis == Axis.horizontal ? size : thickness,
@@ -184,7 +220,7 @@ class Notch extends StatelessWidget {
 
     return SizedBoxFlex(
       axis: axis,
-      x: size,
+      width: size,
       child: Flex(
         direction: axis.opposite,
         children: [
