@@ -106,7 +106,7 @@ class Notch extends StatelessWidget {
 
         return Flex(
           direction: axis,
-          crossAxisAlignment: notchSide.toCrossAxisAlignment(),
+          crossAxisAlignment: notchSide.toNotchCrossAxisAlignment(),
           children: [
             for (var i = 0; i < mmsCount; i++)
               SizedBoxFlex(
@@ -157,7 +157,7 @@ class Notch extends StatelessWidget {
 
         return Flex(
           direction: axis,
-          crossAxisAlignment: notchSide.toCrossAxisAlignment(),
+          crossAxisAlignment: notchSide.toNotchCrossAxisAlignment(),
           children: [
             for (var i = 0; i < graduationsCount; i++)
               SizedBoxFlex(
@@ -221,7 +221,6 @@ class Notch extends StatelessWidget {
       child: Flex(
         direction: axis.opposite,
         mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           if (numberSide == RulerSide.start) ...text.reversed,
           if (showBase && notchSide == RulerSide.start) baseWidget,
@@ -282,7 +281,7 @@ class _Graduation extends StatelessWidget {
   Widget build(BuildContext context) {
     return showOther
         ? Flex(
-            crossAxisAlignment: side.toCrossAxisAlignment(),
+            crossAxisAlignment: side.toNotchCrossAxisAlignment(),
             direction: axis,
             children: [
               buildGraduation(thickness),

@@ -25,12 +25,21 @@ enum RulerSide {
   /// The notches are aligned to the end of the ruler.
   bool get isEnd => this == RulerSide.end;
 
-  CrossAxisAlignment toCrossAxisAlignment() {
+  CrossAxisAlignment toNotchCrossAxisAlignment() {
     switch (this) {
       case RulerSide.start:
         return CrossAxisAlignment.start;
       case RulerSide.end:
         return CrossAxisAlignment.end;
+    }
+  }
+
+  CrossAxisAlignment toRulerCrossAxisAlignment() {
+    switch (this) {
+      case RulerSide.start:
+        return CrossAxisAlignment.end;
+      case RulerSide.end:
+        return CrossAxisAlignment.start;
     }
   }
 }

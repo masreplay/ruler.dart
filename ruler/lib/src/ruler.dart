@@ -192,8 +192,9 @@ class Ruler extends StatelessWidget {
                     graduations: graduations,
                     inchWidth: inchWidth,
                     inchesCount: inches,
-                    extraGraduation: extraGraduation,
+                    extraWidth: extraGraduation,
                     notchSide: notchSide,
+                    numberSide: numberSide,
                   );
                 },
               );
@@ -223,8 +224,9 @@ class Ruler extends StatelessWidget {
                     graduations: graduations,
                     inchWidth: inch,
                     inchesCount: inches,
-                    extraGraduation: extra,
+                    extraWidth: extra,
                     notchSide: notchSide,
+                    numberSide: numberSide,
                   );
                 },
               );
@@ -261,8 +263,9 @@ class Ruler extends StatelessWidget {
                             inchWidth: inchWidth,
                             graduations: graduation,
                             inchesCount: inches.toInt(),
-                            extraGraduation: extra,
+                            extraWidth: extra,
                             notchSide: notchSide,
+                            numberSide: numberSide,
                           );
                         },
                       );
@@ -350,9 +353,10 @@ class InchesRuler extends StatelessWidget {
     required this.axis,
     required this.inchesCount,
     required this.inchWidth,
-    required this.extraGraduation,
+    required this.extraWidth,
     required this.graduations,
     required this.notchSide,
+    required this.numberSide,
   });
 
   final int inchesCount;
@@ -361,21 +365,23 @@ class InchesRuler extends StatelessWidget {
 
   final double inchWidth;
 
-  final double extraGraduation;
+  final double extraWidth;
 
   final Axis axis;
 
   final RulerSide notchSide;
 
+  final RulerSide numberSide;
+
   @override
   Widget build(BuildContext context) {
     return Flex(
       direction: axis,
-      crossAxisAlignment: notchSide.toCrossAxisAlignment(),
+      crossAxisAlignment: numberSide.toRulerCrossAxisAlignment(),
       mainAxisSize: MainAxisSize.min,
       children: [
         ...List.generate(inchesCount, (i) {
-          final showLastPart = i == inchesCount - 1 && extraGraduation == 0;
+          final showLastPart = i == inchesCount - 1 && extraWidth == 0;
           final bool showLastNumber = i == inchesCount - 1;
 
           return Notch(
@@ -387,14 +393,14 @@ class InchesRuler extends StatelessWidget {
             showLastNumber: showLastNumber,
           );
         }),
-        if (extraGraduation > 0)
+        if (extraWidth > 0)
           Container(
             color: Colors.transparent,
             child: Notch(
               axis: axis,
-              extraGraduation.inch(graduations),
+              extraWidth.inch(graduations),
               number: inchesCount < 1 ? inchesCount : null,
-              size: inchWidth * extraGraduation,
+              size: inchWidth * extraWidth,
             ),
           ),
       ],
@@ -406,7 +412,7 @@ class InchesRuler extends StatelessWidget {
     super.debugFillProperties(properties);
     properties.add(IntProperty('inches', inchesCount));
     properties.add(DoubleProperty('inchSize', inchWidth));
-    properties.add(DoubleProperty('extraGraduation', extraGraduation));
+    properties.add(DoubleProperty('extraGraduation', extraWidth));
     properties.add(EnumProperty('axis', axis));
     properties.add(IntProperty('graduations', graduations));
   }
