@@ -26,9 +26,7 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const padding = SizedBox.square(dimension: 48);
-
-    final cms = 0.9.cm;
+    final distance = (16.9 / 8).inch(8);
 
     return Scaffold(
       appBar: AppBar(title: const Text("Rulers")),
@@ -37,10 +35,10 @@ class HomePage extends StatelessWidget {
           /// 10 centimeters
           // Ruler.count(0.05.cm),
 
-          Ruler.count(cms),
+          Ruler.count(distance),
           Expanded(
             child: Ruler.count(
-              cms,
+              distance,
               axis: Axis.vertical,
             ),
           ),

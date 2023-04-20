@@ -93,7 +93,7 @@ class Notch extends StatelessWidget {
       axis: axis,
       distance: distance,
       size: size,
-      cmBuilder: (cm, mmsCount, mmSize, extraSize) {
+      cmBuilder: (distance, mmsCount, mmSize, extraSize) {
         double getNotchLength(int position) {
           if (position == 0 || position == 10) {
             return 20.0 * notchScaleFactor;
@@ -127,7 +127,7 @@ class Notch extends StatelessWidget {
               SizedBoxFlex(
                 axis: axis,
                 width: extraSize,
-                child: cm > 0.1
+                child: distance > 0.1
                     ? null
                     : _Graduation(
                         axis: axis,
@@ -143,9 +143,8 @@ class Notch extends StatelessWidget {
           ],
         );
       },
-      inchBuilder:
-          (inch, graduations, gradsCount, graduationWidth, extraWidth) {
-        print(extraWidth);
+      inchBuilder: (distance, graduations, graduationsCount, graduationWidth,
+          extraWidth) {
         double getNotchLength(int position) {
           if (position == 0 || position == graduations) {
             return 20.0 * notchScaleFactor;
@@ -160,7 +159,7 @@ class Notch extends StatelessWidget {
           direction: axis,
           crossAxisAlignment: notchSide.toCrossAxisAlignment(),
           children: [
-            for (var i = 0; i < gradsCount; i++)
+            for (var i = 0; i < graduationsCount; i++)
               SizedBoxFlex(
                 axis: axis,
                 width: graduationWidth,
@@ -169,7 +168,7 @@ class Notch extends StatelessWidget {
                   size: graduationWidth,
                   length: getNotchLength(i),
                   otherLength: getNotchLength(i + 1),
-                  showOther: i == gradsCount - 1 && showLastPart,
+                  showOther: i == graduationsCount - 1 && showLastPart,
                   thickness: thickness,
                   side: notchSide,
                   color: notchColor,
@@ -179,25 +178,23 @@ class Notch extends StatelessWidget {
               SizedBoxFlex(
                 axis: axis,
                 width: extraWidth,
-                child: inch > 0.1
-                    ? null
-                    : _Graduation(
-                        axis: axis,
-                        size: extraWidth,
-                        thickness: thickness,
-                        side: notchSide,
-                        color: notchColor,
-                        length: getNotchLength(0),
-                        otherLength: getNotchLength(1),
-                        showOther: false,
-                      ),
+                child: _Graduation(
+                  axis: axis,
+                  size: extraWidth,
+                  thickness: thickness,
+                  side: notchSide,
+                  color: notchColor,
+                  length: getNotchLength(0),
+                  otherLength: getNotchLength(1),
+                  showOther: false,
+                ),
               ),
           ],
         );
       },
     );
 
-    final text = number == null
+    final List<Widget> text = number == null
         ? []
         : [
             SizedBox.square(dimension: numberSpacing),

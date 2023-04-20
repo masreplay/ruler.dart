@@ -2,18 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:ruler/src/distance_unit.dart';
 
 typedef InchWidgetBuilder = Widget Function(
-  double inch,
+  double distance,
   int graduations,
-  int gradsCount,
-  double gradSize,
-  double extraSize,
+  int graduationsCount,
+  double graduationWidth,
+  double extraWidth,
 );
 
 typedef CMWidgetBuilder = Widget Function(
-  double cm,
+  double distance,
   int mmsCount,
   double mmSize,
-  double extraSize,
+  double extraWidth,
 );
 
 /// Builds a notch depending on the unit of measurement [DistanceUnit]
@@ -62,29 +62,30 @@ class NotchBuilder extends StatelessWidget {
   /// Builds the distance builder depending on the unit of measurement
   Widget buildDistance(double size) {
     return distance.when(
-      cm: (double cm) {
-        assert(cm <= 1.0 && cm >= 0.0);
+      cm: (distance) {
+        assert(distance <= 1.0 && distance >= 0.0);
 
-        final mms = cm * 10;
+        final mms = distance * 10;
         final mmsCount = mms.toInt();
         final mmSize = size / mms;
 
         final extra = mms - mms.toInt();
         final extraSize = extra * mmSize;
 
-        return cmBuilder(cm, mmsCount, mmSize, extraSize);
+        return cmBuilder(distance, mmsCount, mmSize, extraSize);
       },
-      inch: (inch, graduation) {
-        assert(inch <= 1.0 && inch >= 0.0);
+      inch: (distance, graduation) {
+        assert(distance <= 1.0 && distance >= 0.0);
 
-        final grads = inch * graduation;
-        final gradsCount = grads.toInt();
-        final gradSize = size / grads;
+        final graduations = distance * graduation;
+        final graduationsCount = graduations.toInt();
+        final graduationSize = size / graduations;
 
-        final extra = grads - grads.toInt();
-        final extraSize = extra * gradSize;
+        final extra = graduations - graduations.toInt();
+        final extraSize = extra * graduationSize;
 
-        return inchBuilder(inch, graduation, gradsCount, gradSize, extraSize);
+        return inchBuilder(
+            distance, graduation, graduationsCount, graduationSize, extraSize);
       },
     );
   }

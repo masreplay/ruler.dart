@@ -191,7 +191,7 @@ class Ruler extends StatelessWidget {
                     axis: axis,
                     graduations: graduations,
                     inchWidth: inchWidth,
-                    inches: inches,
+                    inchesCount: inches,
                     extraGraduation: extraGraduation,
                     notchSide: notchSide,
                   );
@@ -222,7 +222,7 @@ class Ruler extends StatelessWidget {
                     axis: axis,
                     graduations: graduations,
                     inchWidth: inch,
-                    inches: inches,
+                    inchesCount: inches,
                     extraGraduation: extra,
                     notchSide: notchSide,
                   );
@@ -260,7 +260,7 @@ class Ruler extends StatelessWidget {
                             axis: axis,
                             inchWidth: inchWidth,
                             graduations: graduation,
-                            inches: inches.toInt(),
+                            inchesCount: inches.toInt(),
                             extraGraduation: extra,
                             notchSide: notchSide,
                           );
@@ -304,7 +304,6 @@ class CentimeterRuler extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final hasExtra = extraCm > 0;
     return Flex(
       direction: axis,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -326,6 +325,7 @@ class CentimeterRuler extends StatelessWidget {
           Notch(
             extraCm.cm,
             axis: axis,
+            number: cmsCount < 1 ? cmsCount : null,
             size: extraCm * cmSize,
           ),
       ],
@@ -348,14 +348,14 @@ class InchesRuler extends StatelessWidget {
   const InchesRuler({
     super.key,
     required this.axis,
-    required this.inches,
+    required this.inchesCount,
     required this.inchWidth,
     required this.extraGraduation,
     required this.graduations,
     required this.notchSide,
   });
 
-  final int inches;
+  final int inchesCount;
 
   final int graduations;
 
@@ -375,9 +375,9 @@ class InchesRuler extends StatelessWidget {
       crossAxisAlignment:
           haveExtra ? CrossAxisAlignment.start : CrossAxisAlignment.end,
       children: [
-        ...List.generate(inches, (i) {
-          final showLastPart = i == inches - 1 && extraGraduation == 0;
-          final bool showLastNumber = i == inches - 1;
+        ...List.generate(inchesCount, (i) {
+          final showLastPart = i == inchesCount - 1 && extraGraduation == 0;
+          final bool showLastNumber = i == inchesCount - 1;
 
           return Notch(
             axis: axis,
@@ -392,6 +392,7 @@ class InchesRuler extends StatelessWidget {
           Notch(
             axis: axis,
             extraGraduation.inch(graduations),
+            number: inchesCount < 1 ? inchesCount : null,
             size: inchWidth * extraGraduation,
           ),
       ],
@@ -401,7 +402,7 @@ class InchesRuler extends StatelessWidget {
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties.add(IntProperty('inches', inches));
+    properties.add(IntProperty('inches', inchesCount));
     properties.add(DoubleProperty('inchSize', inchWidth));
     properties.add(DoubleProperty('extraGraduation', extraGraduation));
     properties.add(EnumProperty('axis', axis));
