@@ -48,7 +48,7 @@ class HomePage extends StatelessWidget {
           padding,
 
           DynamicDoubleSidedRuler(
-            sizeInCm: 100,
+            size: 100,
             child: Container(
               width: 100,
               height: 100,
@@ -57,41 +57,6 @@ class HomePage extends StatelessWidget {
           )
         ],
       ),
-    );
-  }
-}
-
-class DynamicDoubleSidedRuler extends StatelessWidget {
-  const DynamicDoubleSidedRuler({
-    super.key,
-    required this.child,
-    required this.sizeInCm,
-  });
-
-  /// the widget to be placed between the rulers and measured
-  final Widget child;
-  final double sizeInCm;
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Ruler.dynamic(
-          sizeInCm.cm,
-          notchSide: RulerSide.end,
-          textSide: RulerSide.start,
-        ),
-        Container(
-          height: 100,
-          width: 100,
-          color: Colors.red,
-        ),
-        Ruler.dynamic(
-          DistanceUnit.toInch(sizeInCm),
-          notchSide: RulerSide.start,
-        ),
-      ],
     );
   }
 }
