@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ruler/src/axis.dart';
 
 import '../ruler.dart';
 
@@ -6,34 +7,35 @@ class DynamicDoubleSidedRuler extends StatelessWidget {
   const DynamicDoubleSidedRuler({
     super.key,
     required this.child,
-    this.axis = Axis.horizontal,
-    required this.size,
+    this.rulersAxis = Axis.horizontal,
+    required this.cmWidth,
   });
 
   /// the widget to be placed between the rulers and measured
   final Widget child;
 
   /// the size of the widget in centimeters
-  final double size;
+  final double cmWidth;
 
-  final Axis axis;
+  /// the axis of the rulers
+  final Axis rulersAxis;
 
   @override
   Widget build(BuildContext context) {
     return Flex(
-      direction: axis,
+      direction: rulersAxis.opposite,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Ruler.dynamic(
-          size.cm,
-          axis: axis,
+          cmWidth.cm,
+          axis: rulersAxis,
           notchSide: RulerSide.end,
           textSide: RulerSide.start,
         ),
         child,
         Ruler.dynamic(
-          DistanceUnit.toInch(size),
-          axis: axis,
+          DistanceUnit.toInch(cmWidth),
+          axis: rulersAxis,
           notchSide: RulerSide.start,
           textSide: RulerSide.end,
         ),

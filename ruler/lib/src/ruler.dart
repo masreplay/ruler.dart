@@ -168,6 +168,7 @@ class Ruler extends StatelessWidget {
                   cmSize: cmSize,
                   cmsCount: cmCount,
                   extraCm: extraGraduation,
+                  notchSide: notchSide,
                 );
               },
               inch: (width, graduations) {
@@ -192,6 +193,7 @@ class Ruler extends StatelessWidget {
                   inchSize: inch,
                   inches: inches,
                   extraGraduation: extraGraduation,
+                  notchSide: notchSide,
                 );
               },
             );
@@ -207,6 +209,7 @@ class Ruler extends StatelessWidget {
                   cmSize: cmSize,
                   cmsCount: cmCount,
                   extraCm: extra,
+                  notchSide: notchSide,
                 );
               },
               inch: (double count, int graduations) {
@@ -220,6 +223,7 @@ class Ruler extends StatelessWidget {
                   inchSize: inch,
                   inches: inches,
                   extraGraduation: extra,
+                  notchSide: notchSide,
                 );
               },
             );
@@ -243,6 +247,7 @@ class Ruler extends StatelessWidget {
                           cmSize: cmWidth,
                           cmsCount: cmCount,
                           extraCm: extra,
+                          notchSide: notchSide,
                         );
                       },
                       inch: (_, graduation) {
@@ -255,6 +260,7 @@ class Ruler extends StatelessWidget {
                           graduations: graduation,
                           inches: inches.toInt(),
                           extraGraduation: extra,
+                          notchSide: notchSide,
                         );
                       },
                     );
@@ -277,6 +283,7 @@ class CentimeterRuler extends StatelessWidget {
     required this.cmsCount,
     required this.cmSize,
     required this.extraCm,
+    required this.notchSide,
   });
 
   final int cmsCount;
@@ -287,10 +294,13 @@ class CentimeterRuler extends StatelessWidget {
 
   final Axis axis;
 
+  final RulerSide notchSide;
+
   @override
   Widget build(BuildContext context) {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
+    return Flex(
+      direction: axis,
+      crossAxisAlignment: notchSide.toCrossAxisAlignment(),
       children: [
         ...List.generate(cmsCount, (i) {
           final showLastPart = i == cmsCount - 1 && extraCm == 0;
@@ -335,6 +345,7 @@ class InchesRuler extends StatelessWidget {
     required this.inchSize,
     required this.extraGraduation,
     required this.graduations,
+    required this.notchSide,
   });
 
   final int inches;
@@ -347,14 +358,17 @@ class InchesRuler extends StatelessWidget {
 
   final Axis axis;
 
+  final RulerSide notchSide;
+
   @override
   Widget build(BuildContext context) {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
+    return Flex(
+      direction: axis,
+      crossAxisAlignment: notchSide.toCrossAxisAlignment(),
       children: [
         ...List.generate(inches, (i) {
           final showLastPart = i == inches - 1 && extraGraduation == 0;
-          final bool showLastNumber = i == inches - 1 && extraGraduation == 0;
+          final bool showLastNumber = i == inches - 1;
 
           return Notch(
             axis: axis,
@@ -370,7 +384,6 @@ class InchesRuler extends StatelessWidget {
             axis: axis,
             extraGraduation.inch(graduations),
             size: inchSize * extraGraduation,
-            number: inches,
           ),
       ],
     );

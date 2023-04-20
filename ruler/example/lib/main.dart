@@ -13,6 +13,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       theme: ThemeData(
         primarySwatch: Colors.blue,
+        brightness: Brightness.dark,
         useMaterial3: true,
       ),
       home: const HomePage(),
@@ -47,12 +48,15 @@ class HomePage extends StatelessWidget {
 
           padding,
 
-          DynamicDoubleSidedRuler(
-            size: 100,
-            child: Container(
-              width: 100,
-              height: 100,
-              color: Colors.red,
+          Expanded(
+            child: DynamicDoubleSidedRuler(
+              cmWidth: 100,
+              rulersAxis: Axis.vertical,
+              child: Container(
+                width: 100,
+                height: 100,
+                color: Colors.red,
+              ),
             ),
           )
         ],

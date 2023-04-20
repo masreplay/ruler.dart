@@ -46,22 +46,7 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(title: const Text("Ruler")),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Ruler.dynamic(
-            100.cm,
-            notchSide: RulerSide.end,
-            textSide: RulerSide.start,
-          ),
-          Container(
-            height: 100,
-            width: 100,
-            color: Colors.red,
-          ),
-          Ruler.dynamic(
-            100.cm,
-            notchSide: RulerSide.start,
-          ),
-        ],
+        children: const [],
       ),
     );
   }
