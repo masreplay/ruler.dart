@@ -369,11 +369,10 @@ class InchesRuler extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final haveExtra = extraGraduation > 0;
     return Flex(
       direction: axis,
-      crossAxisAlignment:
-          haveExtra ? CrossAxisAlignment.start : CrossAxisAlignment.end,
+      crossAxisAlignment: notchSide.toCrossAxisAlignment(),
+      mainAxisSize: MainAxisSize.min,
       children: [
         ...List.generate(inchesCount, (i) {
           final showLastPart = i == inchesCount - 1 && extraGraduation == 0;
@@ -389,11 +388,14 @@ class InchesRuler extends StatelessWidget {
           );
         }),
         if (extraGraduation > 0)
-          Notch(
-            axis: axis,
-            extraGraduation.inch(graduations),
-            number: inchesCount < 1 ? inchesCount : null,
-            size: inchWidth * extraGraduation,
+          Container(
+            color: Colors.transparent,
+            child: Notch(
+              axis: axis,
+              extraGraduation.inch(graduations),
+              number: inchesCount < 1 ? inchesCount : null,
+              size: inchWidth * extraGraduation,
+            ),
           ),
       ],
     );

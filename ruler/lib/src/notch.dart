@@ -220,6 +220,8 @@ class Notch extends StatelessWidget {
       width: size,
       child: Flex(
         direction: axis.opposite,
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           if (numberSide == RulerSide.start) ...text.reversed,
           if (showBase && notchSide == RulerSide.start) baseWidget,
