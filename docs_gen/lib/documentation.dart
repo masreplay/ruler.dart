@@ -23,6 +23,7 @@ class Documentation with _$Documentation {
     required String description,
     required Widget widget,
     required String code,
+    @Default(Size(100, 100)) Size renderSize,
   }) = DocumentationWidget;
 
   const factory Documentation.textTable({

@@ -20,8 +20,8 @@ mixin _$Documentation {
   TResult when<TResult extends Object?>({
     required TResult Function(String text, TextType type, TextSize size) text,
     required TResult Function(String text, String path) assetsImage,
-    required TResult Function(
-            String name, String description, Widget widget, String code)
+    required TResult Function(String name, String description, Widget widget,
+            String code, Size renderSize)
         widget,
     required TResult Function(List<DocumentationText> cells,
             List<DocumentationText> columns, List<DocumentationText> rows)
@@ -33,8 +33,8 @@ mixin _$Documentation {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String text, TextType type, TextSize size)? text,
     TResult? Function(String text, String path)? assetsImage,
-    TResult? Function(
-            String name, String description, Widget widget, String code)?
+    TResult? Function(String name, String description, Widget widget,
+            String code, Size renderSize)?
         widget,
     TResult? Function(List<DocumentationText> cells,
             List<DocumentationText> columns, List<DocumentationText> rows)?
@@ -46,8 +46,8 @@ mixin _$Documentation {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String text, TextType type, TextSize size)? text,
     TResult Function(String text, String path)? assetsImage,
-    TResult Function(
-            String name, String description, Widget widget, String code)?
+    TResult Function(String name, String description, Widget widget,
+            String code, Size renderSize)?
         widget,
     TResult Function(List<DocumentationText> cells,
             List<DocumentationText> columns, List<DocumentationText> rows)?
@@ -190,8 +190,8 @@ class _$DocumentationText extends DocumentationText {
   TResult when<TResult extends Object?>({
     required TResult Function(String text, TextType type, TextSize size) text,
     required TResult Function(String text, String path) assetsImage,
-    required TResult Function(
-            String name, String description, Widget widget, String code)
+    required TResult Function(String name, String description, Widget widget,
+            String code, Size renderSize)
         widget,
     required TResult Function(List<DocumentationText> cells,
             List<DocumentationText> columns, List<DocumentationText> rows)
@@ -206,8 +206,8 @@ class _$DocumentationText extends DocumentationText {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String text, TextType type, TextSize size)? text,
     TResult? Function(String text, String path)? assetsImage,
-    TResult? Function(
-            String name, String description, Widget widget, String code)?
+    TResult? Function(String name, String description, Widget widget,
+            String code, Size renderSize)?
         widget,
     TResult? Function(List<DocumentationText> cells,
             List<DocumentationText> columns, List<DocumentationText> rows)?
@@ -222,8 +222,8 @@ class _$DocumentationText extends DocumentationText {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String text, TextType type, TextSize size)? text,
     TResult Function(String text, String path)? assetsImage,
-    TResult Function(
-            String name, String description, Widget widget, String code)?
+    TResult Function(String name, String description, Widget widget,
+            String code, Size renderSize)?
         widget,
     TResult Function(List<DocumentationText> cells,
             List<DocumentationText> columns, List<DocumentationText> rows)?
@@ -368,8 +368,8 @@ class _$DocumentationAssetsImage extends DocumentationAssetsImage {
   TResult when<TResult extends Object?>({
     required TResult Function(String text, TextType type, TextSize size) text,
     required TResult Function(String text, String path) assetsImage,
-    required TResult Function(
-            String name, String description, Widget widget, String code)
+    required TResult Function(String name, String description, Widget widget,
+            String code, Size renderSize)
         widget,
     required TResult Function(List<DocumentationText> cells,
             List<DocumentationText> columns, List<DocumentationText> rows)
@@ -384,8 +384,8 @@ class _$DocumentationAssetsImage extends DocumentationAssetsImage {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String text, TextType type, TextSize size)? text,
     TResult? Function(String text, String path)? assetsImage,
-    TResult? Function(
-            String name, String description, Widget widget, String code)?
+    TResult? Function(String name, String description, Widget widget,
+            String code, Size renderSize)?
         widget,
     TResult? Function(List<DocumentationText> cells,
             List<DocumentationText> columns, List<DocumentationText> rows)?
@@ -400,8 +400,8 @@ class _$DocumentationAssetsImage extends DocumentationAssetsImage {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String text, TextType type, TextSize size)? text,
     TResult Function(String text, String path)? assetsImage,
-    TResult Function(
-            String name, String description, Widget widget, String code)?
+    TResult Function(String name, String description, Widget widget,
+            String code, Size renderSize)?
         widget,
     TResult Function(List<DocumentationText> cells,
             List<DocumentationText> columns, List<DocumentationText> rows)?
@@ -475,7 +475,12 @@ abstract class _$$DocumentationWidgetCopyWith<$Res> {
           $Res Function(_$DocumentationWidget) then) =
       __$$DocumentationWidgetCopyWithImpl<$Res>;
   @useResult
-  $Res call({String name, String description, Widget widget, String code});
+  $Res call(
+      {String name,
+      String description,
+      Widget widget,
+      String code,
+      Size renderSize});
 }
 
 /// @nodoc
@@ -493,6 +498,7 @@ class __$$DocumentationWidgetCopyWithImpl<$Res>
     Object? description = null,
     Object? widget = null,
     Object? code = null,
+    Object? renderSize = null,
   }) {
     return _then(_$DocumentationWidget(
       name: null == name
@@ -511,6 +517,10 @@ class __$$DocumentationWidgetCopyWithImpl<$Res>
           ? _value.code
           : code // ignore: cast_nullable_to_non_nullable
               as String,
+      renderSize: null == renderSize
+          ? _value.renderSize
+          : renderSize // ignore: cast_nullable_to_non_nullable
+              as Size,
     ));
   }
 }
@@ -522,7 +532,8 @@ class _$DocumentationWidget extends DocumentationWidget {
       {required this.name,
       required this.description,
       required this.widget,
-      required this.code})
+      required this.code,
+      this.renderSize = const Size(100, 100)})
       : super._();
 
   @override
@@ -533,10 +544,13 @@ class _$DocumentationWidget extends DocumentationWidget {
   final Widget widget;
   @override
   final String code;
+  @override
+  @JsonKey()
+  final Size renderSize;
 
   @override
   String toString() {
-    return 'Documentation.widget(name: $name, description: $description, widget: $widget, code: $code)';
+    return 'Documentation.widget(name: $name, description: $description, widget: $widget, code: $code, renderSize: $renderSize)';
   }
 
   @override
@@ -548,11 +562,14 @@ class _$DocumentationWidget extends DocumentationWidget {
             (identical(other.description, description) ||
                 other.description == description) &&
             (identical(other.widget, widget) || other.widget == widget) &&
-            (identical(other.code, code) || other.code == code));
+            (identical(other.code, code) || other.code == code) &&
+            (identical(other.renderSize, renderSize) ||
+                other.renderSize == renderSize));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, name, description, widget, code);
+  int get hashCode =>
+      Object.hash(runtimeType, name, description, widget, code, renderSize);
 
   @JsonKey(ignore: true)
   @override
@@ -566,15 +583,15 @@ class _$DocumentationWidget extends DocumentationWidget {
   TResult when<TResult extends Object?>({
     required TResult Function(String text, TextType type, TextSize size) text,
     required TResult Function(String text, String path) assetsImage,
-    required TResult Function(
-            String name, String description, Widget widget, String code)
+    required TResult Function(String name, String description, Widget widget,
+            String code, Size renderSize)
         widget,
     required TResult Function(List<DocumentationText> cells,
             List<DocumentationText> columns, List<DocumentationText> rows)
         textTable,
     required TResult Function(List<DocumentationWidget> widgets) widgetsTable,
   }) {
-    return widget(name, description, this.widget, code);
+    return widget(name, description, this.widget, code, renderSize);
   }
 
   @override
@@ -582,15 +599,15 @@ class _$DocumentationWidget extends DocumentationWidget {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String text, TextType type, TextSize size)? text,
     TResult? Function(String text, String path)? assetsImage,
-    TResult? Function(
-            String name, String description, Widget widget, String code)?
+    TResult? Function(String name, String description, Widget widget,
+            String code, Size renderSize)?
         widget,
     TResult? Function(List<DocumentationText> cells,
             List<DocumentationText> columns, List<DocumentationText> rows)?
         textTable,
     TResult? Function(List<DocumentationWidget> widgets)? widgetsTable,
   }) {
-    return widget?.call(name, description, this.widget, code);
+    return widget?.call(name, description, this.widget, code, renderSize);
   }
 
   @override
@@ -598,8 +615,8 @@ class _$DocumentationWidget extends DocumentationWidget {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String text, TextType type, TextSize size)? text,
     TResult Function(String text, String path)? assetsImage,
-    TResult Function(
-            String name, String description, Widget widget, String code)?
+    TResult Function(String name, String description, Widget widget,
+            String code, Size renderSize)?
         widget,
     TResult Function(List<DocumentationText> cells,
             List<DocumentationText> columns, List<DocumentationText> rows)?
@@ -608,7 +625,7 @@ class _$DocumentationWidget extends DocumentationWidget {
     required TResult orElse(),
   }) {
     if (widget != null) {
-      return widget(name, description, this.widget, code);
+      return widget(name, description, this.widget, code, renderSize);
     }
     return orElse();
   }
@@ -659,13 +676,15 @@ abstract class DocumentationWidget extends Documentation {
       {required final String name,
       required final String description,
       required final Widget widget,
-      required final String code}) = _$DocumentationWidget;
+      required final String code,
+      final Size renderSize}) = _$DocumentationWidget;
   const DocumentationWidget._() : super._();
 
   String get name;
   String get description;
   Widget get widget;
   String get code;
+  Size get renderSize;
   @JsonKey(ignore: true)
   _$$DocumentationWidgetCopyWith<_$DocumentationWidget> get copyWith =>
       throw _privateConstructorUsedError;
@@ -785,8 +804,8 @@ class _$DocumentationTextTable extends DocumentationTextTable {
   TResult when<TResult extends Object?>({
     required TResult Function(String text, TextType type, TextSize size) text,
     required TResult Function(String text, String path) assetsImage,
-    required TResult Function(
-            String name, String description, Widget widget, String code)
+    required TResult Function(String name, String description, Widget widget,
+            String code, Size renderSize)
         widget,
     required TResult Function(List<DocumentationText> cells,
             List<DocumentationText> columns, List<DocumentationText> rows)
@@ -801,8 +820,8 @@ class _$DocumentationTextTable extends DocumentationTextTable {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String text, TextType type, TextSize size)? text,
     TResult? Function(String text, String path)? assetsImage,
-    TResult? Function(
-            String name, String description, Widget widget, String code)?
+    TResult? Function(String name, String description, Widget widget,
+            String code, Size renderSize)?
         widget,
     TResult? Function(List<DocumentationText> cells,
             List<DocumentationText> columns, List<DocumentationText> rows)?
@@ -817,8 +836,8 @@ class _$DocumentationTextTable extends DocumentationTextTable {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String text, TextType type, TextSize size)? text,
     TResult Function(String text, String path)? assetsImage,
-    TResult Function(
-            String name, String description, Widget widget, String code)?
+    TResult Function(String name, String description, Widget widget,
+            String code, Size renderSize)?
         widget,
     TResult Function(List<DocumentationText> cells,
             List<DocumentationText> columns, List<DocumentationText> rows)?
@@ -965,8 +984,8 @@ class _$DocumentationWidgetsTable extends DocumentationWidgetsTable {
   TResult when<TResult extends Object?>({
     required TResult Function(String text, TextType type, TextSize size) text,
     required TResult Function(String text, String path) assetsImage,
-    required TResult Function(
-            String name, String description, Widget widget, String code)
+    required TResult Function(String name, String description, Widget widget,
+            String code, Size renderSize)
         widget,
     required TResult Function(List<DocumentationText> cells,
             List<DocumentationText> columns, List<DocumentationText> rows)
@@ -981,8 +1000,8 @@ class _$DocumentationWidgetsTable extends DocumentationWidgetsTable {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String text, TextType type, TextSize size)? text,
     TResult? Function(String text, String path)? assetsImage,
-    TResult? Function(
-            String name, String description, Widget widget, String code)?
+    TResult? Function(String name, String description, Widget widget,
+            String code, Size renderSize)?
         widget,
     TResult? Function(List<DocumentationText> cells,
             List<DocumentationText> columns, List<DocumentationText> rows)?
@@ -997,8 +1016,8 @@ class _$DocumentationWidgetsTable extends DocumentationWidgetsTable {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String text, TextType type, TextSize size)? text,
     TResult Function(String text, String path)? assetsImage,
-    TResult Function(
-            String name, String description, Widget widget, String code)?
+    TResult Function(String name, String description, Widget widget,
+            String code, Size renderSize)?
         widget,
     TResult Function(List<DocumentationText> cells,
             List<DocumentationText> columns, List<DocumentationText> rows)?

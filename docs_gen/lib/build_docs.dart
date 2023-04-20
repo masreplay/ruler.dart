@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 import 'documentation.dart';
 import 'generate_image.dart';
+import 'main.dart';
 
 class ImageData {
   final String name;
@@ -11,7 +12,7 @@ class ImageData {
 
   const ImageData({required this.name, required this.path});
 
-  String get image => "![$name]($path)";
+  String get code => "![$name]($path)";
   String get htmlImage => "<img src=\"$path\" alt=\"$name\" />";
 }
 
@@ -25,7 +26,16 @@ Future<String> buildMarkdown(Documentation doc) async {
       // return "![${value.text}](${value.path})";
     },
     widget: (value) async {
-      return (await buildWidgetDocs(value)).image;
+      final image = await buildWidgetDocs(value);
+      final buffer = StringBuffer();
+      buffer.writeln(TextSize.heading4.build(value.description));
+      buffer.writeln(image.htmlImage);
+      // code
+      buffer.writeln("```dart");
+      buffer.writeln(value.code);
+      buffer.writeln("```");
+
+      return buffer.toString();
     },
     widgetsTable: (value) async {
       final buffer = StringBuffer();
@@ -54,7 +64,7 @@ Future<String> buildMarkdown(Documentation doc) async {
 }
 
 Future<ImageData> buildWidgetDocs(DocumentationWidget value) async {
-  const size = Size(100, 100);
+  final size = value.renderSize;
   final image = await generateImage(
     widget: Directionality(
       textDirection: TextDirection.ltr,
@@ -64,20 +74,24 @@ Future<ImageData> buildWidgetDocs(DocumentationWidget value) async {
           dividerColor: Colors.black,
           useMaterial3: false,
         ),
-        child: Container(
-          width: size.width,
-          height: size.height,
-          color: Colors.white,
-          child: value.widget,
+        child: Center(
+          child: Container(
+            width: size.width,
+            height: size.height,
+            color: Colors.transparent,
+            alignment: Alignment.center,
+            child: value.widget,
+          ),
         ),
       ),
     ),
     size: size,
   );
 
-  final filename = value.description.replaceAll(" ", "_").toLowerCase();
-  final dir = Directory.current.path;
-  await File("$dir/docs/$filename.png").writeAsBytes(image!);
+  final filename = value.name.replaceAll(" ", "_").toLowerCase();
 
-  return ImageData(name: value.description, path: "/docs/$filename.png");
+  final filepath = "/images/$filename.png";
+  await File("$mainDir$filepath").writeAsBytes(image!);
+
+  return ImageData(name: value.description, path: filepath);
 }

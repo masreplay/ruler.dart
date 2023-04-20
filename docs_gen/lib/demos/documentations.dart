@@ -20,15 +20,21 @@ List<Documentation> getDocumentations(BuildContext context) {
       size: TextSize.paragraph,
     ),
     Documentation.widget(
-      name: 'double_sided',
-      description: "Double-sided ruler",
-      code: "code",
-      widget: Column(
-        children: [
-          Ruler.count(1.cm),
-          Ruler.count(1.cm),
-        ],
-      ),
+        name: 'double_sided',
+        description: "Double-sided ruler",
+        code: code(CodeSegments.doubleSided),
+        renderSize: const Size(500, 250),
+        widget:
+            // BEGIN doubleSided
+            DynamicDoubleSidedRuler(
+          cmWidth: 100,
+          child: Container(color: Colors.red, height: 100, width: 100),
+        )
+        // END
+        ),
+    Documentation.text(
+      "Table of contents",
+      size: TextSize.heading3,
     ),
     Documentation.widgetsTable(
       widgets: [
