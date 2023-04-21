@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ruler/ruler.dart';
+import 'package:real_ruler/ruler.dart';
 
 void main() {
   runApp(const MyApp());

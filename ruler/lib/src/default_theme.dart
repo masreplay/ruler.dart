@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:ruler/src/ruler_theme.dart';
+import 'package:real_ruler/src/ruler_theme.dart';
 
 RulerThemeData getDefaultsRulerThemeData(BuildContext context) {
   return Theme.of(context).useMaterial3

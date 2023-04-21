@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ruler/src/distance_unit.dart';
+import 'package:real_ruler/src/distance_unit.dart';
 
 typedef InchWidgetBuilder = Widget Function(
   double distance,

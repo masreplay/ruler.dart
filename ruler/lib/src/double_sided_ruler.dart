@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ruler/src/axis.dart';
+import 'package:real_ruler/src/axis.dart';
 
 import '../ruler.dart';
 

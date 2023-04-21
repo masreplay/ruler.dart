@@ -1,9 +1,9 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:ruler/src/async_snapshot.dart';
-import 'package:ruler/src/distance_unit.dart';
-import 'package:ruler/src/ruler_theme.dart';
+import 'package:real_ruler/src/async_snapshot.dart';
+import 'package:real_ruler/src/distance_unit.dart';
+import 'package:real_ruler/src/ruler_theme.dart';
 
 import 'default_theme.dart';
 import 'inch.dart';

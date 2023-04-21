@@ -1,6 +1,6 @@
 // import 'package:flutter/material.dart';
-// import 'package:ruler/ruler.dart';
-// import 'package:ruler/src/async_snapshot.dart';
+// import 'package:real_ruler/ruler.dart';
+// import 'package:real_ruler/src/async_snapshot.dart';
 
 // import 'inch.dart';
 
