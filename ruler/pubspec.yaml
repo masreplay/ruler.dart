@@ -1,7 +1,9 @@
 name: ruler
 description: A ruler is a widget that displays a ruler with a given distance in cm or inches
 version: 0.0.1
-publish_to: none
+repository: https://github.com/masreplay/error_handler.dart
+homepage: https://github.com/masreplay/error_handler.dart
+
 
 environment:
   sdk: ">=2.19.2 <3.0.0"
