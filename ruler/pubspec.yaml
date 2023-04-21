@@ -1,5 +1,5 @@
 name: ruler
-description: A new Flutter package project.
+description: A ruler is a widget that displays a ruler with a given distance in cm or inches
 version: 0.0.1
 publish_to: none
 
