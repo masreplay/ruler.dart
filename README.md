@@ -6,7 +6,7 @@ A ruler is a widget that displays a ruler with a given distance in cm or inches
 <img src="/docs/images/ruler_real_.png" alt="Ruler.real create an in real life ruler equivalent to real cm or inches" />
 
 ```dart
-Ruler.real()
+Ruler.count(10.cm),
 ```
 
 #### Ruler.count fit the given distance to the width
