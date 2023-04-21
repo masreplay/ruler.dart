@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:real_ruler/ruler.dart';
+import 'package:real_ruler/real_ruler.dart';
 
 import 'documentation.dart';
 import 'generate_image.dart';
