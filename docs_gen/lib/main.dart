@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'build_docs.dart';
 import 'demos/documentations.dart';
 
-const mainDir = "/Users/mas/Documents/GitHub/ruler.dart/docs";
+const mainDir = "/Users/mas/Documents/GitHub/ruler.dart";
 void main() {
   runApp(const MyApp());
 }

@@ -90,7 +90,7 @@ Future<ImageData> buildWidgetDocs(DocumentationWidget value) async {
 
   final filename = value.name.replaceAll(" ", "_").toLowerCase();
 
-  final filepath = "/images/$filename.png";
+  final filepath = "/docs/images/$filename.png";
   await File("$mainDir$filepath").writeAsBytes(image!);
 
   return ImageData(name: value.description, path: filepath);
