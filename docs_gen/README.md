@@ -1,1 +1,1 @@
-docs: code viewer is extracted from flutter gallery repo
+../../README.md

@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:ruler/ruler.dart';
 
 import 'documentation.dart';
 import 'generate_image.dart';
@@ -30,7 +31,8 @@ Future<String> buildMarkdown(Documentation doc) async {
       final buffer = StringBuffer();
       buffer.writeln(TextSize.heading4.build(value.description));
       buffer.writeln(image.htmlImage);
-      // code
+
+      buffer.writeln();
       buffer.writeln("```dart");
       buffer.writeln(value.code);
       buffer.writeln("```");
@@ -65,6 +67,8 @@ Future<String> buildMarkdown(Documentation doc) async {
 
 Future<ImageData> buildWidgetDocs(DocumentationWidget value) async {
   final size = value.renderSize;
+
+  const color = Color(0xFF616161);
   final image = await generateImage(
     widget: Directionality(
       textDirection: TextDirection.ltr,
@@ -74,13 +78,19 @@ Future<ImageData> buildWidgetDocs(DocumentationWidget value) async {
           dividerColor: Colors.black,
           useMaterial3: false,
         ),
-        child: Center(
-          child: Container(
-            width: size.width,
-            height: size.height,
-            color: Colors.transparent,
-            alignment: Alignment.center,
-            child: value.widget,
+        child: RulerTheme(
+          data: RulerThemeData(
+            notchColor: color,
+            numberTextStyle: const TextStyle(color: color),
+          ),
+          child: Center(
+            child: Container(
+              width: size.width,
+              height: size.height,
+              color: Colors.transparent,
+              alignment: Alignment.center,
+              child: value.widget,
+            ),
           ),
         ),
       ),

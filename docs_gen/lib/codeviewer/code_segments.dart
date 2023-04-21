@@ -54,12 +54,12 @@ class CodeSegments {
       TextSpan(style: codeStyle.baseStyle, text: '\u000a\u000a'),
       TextSpan(style: codeStyle.classStyle, text: 'DynamicDoubleSidedRuler'),
       TextSpan(style: codeStyle.punctuationStyle, text: '('),
-      TextSpan(style: codeStyle.baseStyle, text: '\u000a  cmWidth'),
+      TextSpan(style: codeStyle.baseStyle, text: '\u000a      cmWidth'),
       TextSpan(style: codeStyle.punctuationStyle, text: ':'),
       TextSpan(style: codeStyle.baseStyle, text: ' '),
       TextSpan(style: codeStyle.numberStyle, text: '100'),
       TextSpan(style: codeStyle.punctuationStyle, text: ','),
-      TextSpan(style: codeStyle.baseStyle, text: '\u000a  child'),
+      TextSpan(style: codeStyle.baseStyle, text: '\u000a      child'),
       TextSpan(style: codeStyle.punctuationStyle, text: ':'),
       TextSpan(style: codeStyle.baseStyle, text: ' '),
       TextSpan(style: codeStyle.classStyle, text: 'Container'),
@@ -81,8 +81,8 @@ class CodeSegments {
       TextSpan(style: codeStyle.baseStyle, text: ' '),
       TextSpan(style: codeStyle.numberStyle, text: '100'),
       TextSpan(style: codeStyle.punctuationStyle, text: '),'),
-      TextSpan(style: codeStyle.baseStyle, text: '\u000a'),
-      TextSpan(style: codeStyle.punctuationStyle, text: ')'),
+      TextSpan(style: codeStyle.baseStyle, text: '\u000a    '),
+      TextSpan(style: codeStyle.punctuationStyle, text: ');'),
       TextSpan(style: codeStyle.baseStyle, text: '\u000a\u000a'),
     ]);
   }
@@ -138,6 +138,38 @@ class CodeSegments {
       TextSpan(style: codeStyle.punctuationStyle, text: '.'),
       TextSpan(style: codeStyle.baseStyle, text: 'cm'),
       TextSpan(style: codeStyle.punctuationStyle, text: ')'),
+      TextSpan(style: codeStyle.baseStyle, text: '\u000a\u000a'),
+    ]);
+  }
+
+  static TextSpan rulerCount(BuildContext context) {
+    final codeStyle = CodeStyle.of(context);
+    return TextSpan(children: [
+      TextSpan(style: codeStyle.baseStyle, text: '\u000a\u000a'),
+      TextSpan(style: codeStyle.classStyle, text: 'Ruler'),
+      TextSpan(style: codeStyle.punctuationStyle, text: '.'),
+      TextSpan(style: codeStyle.baseStyle, text: 'count'),
+      TextSpan(style: codeStyle.punctuationStyle, text: '('),
+      TextSpan(style: codeStyle.numberStyle, text: '10'),
+      TextSpan(style: codeStyle.punctuationStyle, text: '.'),
+      TextSpan(style: codeStyle.baseStyle, text: 'cm'),
+      TextSpan(style: codeStyle.punctuationStyle, text: '),'),
+      TextSpan(style: codeStyle.baseStyle, text: '\u000a\u000a'),
+    ]);
+  }
+
+  static TextSpan rulerDynamic(BuildContext context) {
+    final codeStyle = CodeStyle.of(context);
+    return TextSpan(children: [
+      TextSpan(style: codeStyle.baseStyle, text: '\u000a\u000a'),
+      TextSpan(style: codeStyle.classStyle, text: 'Ruler'),
+      TextSpan(style: codeStyle.punctuationStyle, text: '.'),
+      TextSpan(style: codeStyle.keywordStyle, text: 'dynamic'),
+      TextSpan(style: codeStyle.punctuationStyle, text: '('),
+      TextSpan(style: codeStyle.numberStyle, text: '300'),
+      TextSpan(style: codeStyle.punctuationStyle, text: '.'),
+      TextSpan(style: codeStyle.baseStyle, text: 'cm'),
+      TextSpan(style: codeStyle.punctuationStyle, text: '),'),
       TextSpan(style: codeStyle.baseStyle, text: '\u000a\u000a'),
     ]);
   }

@@ -4,6 +4,14 @@ import 'package:ruler/ruler.dart';
 
 import '../documentation.dart';
 
+buildDoubleSided() =>
+    // BEGIN doubleSided
+    DynamicDoubleSidedRuler(
+      cmWidth: 100,
+      child: Container(color: Colors.red, height: 100, width: 100),
+    );
+// END
+
 List<Documentation> getDocumentations(BuildContext context) {
   String code(TextSpan Function(BuildContext context) f) =>
       f(context).toPlainText().trim();
@@ -20,22 +28,42 @@ List<Documentation> getDocumentations(BuildContext context) {
       size: TextSize.paragraph,
     ),
     Documentation.widget(
-        name: 'double_sided',
-        description: "Double-sided ruler",
-        code: code(CodeSegments.doubleSided),
-        renderSize: const Size(500, 250),
-        widget:
-            // BEGIN doubleSided
-            DynamicDoubleSidedRuler(
-          cmWidth: 100,
-          child: Container(color: Colors.red, height: 100, width: 100),
-        )
-        // END
-        ),
-    Documentation.text(
-      "Table of contents",
-      size: TextSize.heading3,
+      name: 'ruler_real_',
+      description:
+          "Ruler.real create an in real life ruler equivalent to real cm or inches",
+      code: "Ruler.real()",
+      renderSize: const Size(500, 250),
+      widget:
+          // BEGIN rulerCount
+          Ruler.count(10.cm),
+      // END
     ),
+    Documentation.widget(
+      name: 'ruler_count_',
+      description: "Ruler.count fit the given distance to the width",
+      code: code(CodeSegments.rulerCount),
+      renderSize: const Size(500, 250),
+      widget: Ruler.count(10.cm),
+    ),
+    Documentation.widget(
+      name: 'ruler_dynamic_',
+      description:
+          "Ruler.dynamic is used to display a ruler with a fixed width in pixels for notch",
+      code: code(CodeSegments.rulerDynamic),
+      renderSize: const Size(500, 250),
+      widget:
+          // BEGIN rulerDynamic
+          Ruler.dynamic(300.cm),
+      // END
+    ),
+    Documentation.widget(
+      name: 'double_sided',
+      description: "Double-sided ruler",
+      code: code(CodeSegments.doubleSided),
+      renderSize: const Size(500, 250),
+      widget: buildDoubleSided(),
+    ),
+    const Documentation.text("Table of contents", size: TextSize.heading3),
     Documentation.widgetsTable(
       widgets: [
         DocumentationWidget(

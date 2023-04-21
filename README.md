@@ -2,13 +2,35 @@
 A ruler is a widget that displays a ruler with a given distance in cm or inches
 ## Overview
 A ruler is a widget that displays a ruler with a given distance in cm or inches
+#### Ruler.real create an in real life ruler equivalent to real cm or inches
+<img src="/docs/images/ruler_real_.png" alt="Ruler.real create an in real life ruler equivalent to real cm or inches" />
+
+```dart
+Ruler.real()
+```
+
+#### Ruler.count fit the given distance to the width
+<img src="/docs/images/ruler_count_.png" alt="Ruler.count fit the given distance to the width" />
+
+```dart
+Ruler.count(10.cm),
+```
+
+#### Ruler.dynamic is used to display a ruler with a fixed width in pixels for notch
+<img src="/docs/images/ruler_dynamic_.png" alt="Ruler.dynamic is used to display a ruler with a fixed width in pixels for notch" />
+
+```dart
+Ruler.dynamic(300.cm),
+```
+
 #### Double-sided ruler
 <img src="/docs/images/double_sided.png" alt="Double-sided ruler" />
+
 ```dart
 DynamicDoubleSidedRuler(
-  cmWidth: 100,
-  child: Container(color: Colors.red, height: 100, width: 100),
-)
+      cmWidth: 100,
+      child: Container(color: Colors.red, height: 100, width: 100),
+    );
 ```
 
 ### Table of contents
