@@ -1,4 +1,4 @@
-import 'package:real_ruler/ruler.dart';
+import 'package:real_ruler/real_ruler.dart';
 
 /// The measure system used to display the ruler.
 enum MeasureSystem {

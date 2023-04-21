@@ -1,6 +1,6 @@
 import 'package:docs/codeviewer/code_segments.dart';
 import 'package:flutter/material.dart';
-import 'package:ruler/ruler.dart';
+import 'package:real_ruler/ruler.dart';
 
 import '../documentation.dart';
 

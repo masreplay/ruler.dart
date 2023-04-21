@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:real_ruler/src/axis.dart';
 
-import '../ruler.dart';
+import '../real_ruler.dart';
 
 class DynamicDoubleSidedRuler extends StatelessWidget {
   const DynamicDoubleSidedRuler({
