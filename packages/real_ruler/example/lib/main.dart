@@ -16,10 +16,7 @@ class MyApp extends StatelessWidget {
         brightness: Brightness.dark,
         useMaterial3: true,
       ),
-      home: const Directionality(
-        textDirection: TextDirection.rtl,
-        child: HomePage(),
-      ),
+      home: const HomePage(),
     );
   }
 }
