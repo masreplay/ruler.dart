@@ -30,10 +30,10 @@ class HomePage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(title: const Text("Rulers")),
-      body: Column(
+      body: ListView(
         children: [
           /// 10 centimeters
-          Ruler.count(0.05.cm),
+          Ruler.count(10.cm),
           padding,
 
           /// 5 inches and 10 graduations per inch
@@ -44,7 +44,8 @@ class HomePage extends StatelessWidget {
           Ruler.count(24.inchGraduation(8)),
           padding,
 
-          Ruler.count(1.inchGraduation(8)),
+          // 4 graduation of inch with 8 graduations
+          Ruler.count(4.inchGraduation(8)),
           padding,
 
           // 100 pixel each cm width
@@ -65,7 +66,8 @@ class HomePage extends StatelessWidget {
           ),
           padding,
 
-          Expanded(
+          SizedBox(
+            height: 100,
             child: DynamicDoubleSidedRuler(
               cmWidth: 100,
               rulersAxis: Axis.vertical,
@@ -75,7 +77,7 @@ class HomePage extends StatelessWidget {
                 color: Colors.red,
               ),
             ),
-          )
+          ),
         ],
       ),
     );

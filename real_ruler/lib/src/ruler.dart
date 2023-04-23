@@ -309,7 +309,7 @@ class CentimeterRuler extends StatelessWidget {
   Widget build(BuildContext context) {
     return Flex(
       direction: axis,
-      crossAxisAlignment: CrossAxisAlignment.start,
+      crossAxisAlignment: numberSide.toRulerCrossAxisAlignment(),
       children: [
         ...List.generate(cmsCount, (i) {
           final showLastPart = i == cmsCount - 1 && extraCm == 0;
@@ -382,7 +382,7 @@ class InchesRuler extends StatelessWidget {
       children: [
         ...List.generate(inchesCount, (i) {
           final showLastPart = i == inchesCount - 1 && extraWidth == 0;
-          final bool showLastNumber = i == inchesCount - 1;
+          final showLastNumber = i == inchesCount - 1;
 
           return Notch(
             axis: axis,
