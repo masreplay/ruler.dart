@@ -298,13 +298,14 @@ class _Graduation extends StatelessWidget {
 
   Widget buildGraduation([double other = 0]) {
     final borderSide = BorderSide(color: color, width: thickness);
+
     return ContainerFlex(
       axis: axis,
       y: size - other,
       x: length,
       decoration: BoxDecoration(
-        border: Border(
-          left: axis == Axis.horizontal ? borderSide : BorderSide.none,
+        border: BorderDirectional(
+          start: axis == Axis.horizontal ? borderSide : BorderSide.none,
           top: axis == Axis.vertical ? borderSide : BorderSide.none,
         ),
       ),

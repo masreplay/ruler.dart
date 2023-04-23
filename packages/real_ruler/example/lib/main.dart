@@ -16,7 +16,10 @@ class MyApp extends StatelessWidget {
         brightness: Brightness.dark,
         useMaterial3: true,
       ),
-      home: const HomePage(),
+      home: const Directionality(
+        textDirection: TextDirection.rtl,
+        child: HomePage(),
+      ),
     );
   }
 }
@@ -32,6 +35,8 @@ class HomePage extends StatelessWidget {
       appBar: AppBar(title: const Text("Rulers")),
       body: ListView(
         children: [
+          Ruler.count(1.cm),
+
           /// 10 centimeters
           Ruler.count(10.cm),
           padding,
