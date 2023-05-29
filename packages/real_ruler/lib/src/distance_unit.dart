@@ -39,6 +39,27 @@ class DistanceUnit with _$DistanceUnit {
     );
   }
 
+  DistanceUnit operator *(double value) {
+    return when(
+      cm: (value) => Centimeter(value * value),
+      inch: (value, _) => Inch(value * value),
+    );
+  }
+
+  DistanceUnit operator +(DistanceUnit value) {
+    return when(
+      cm: (value) => Centimeter(value + value),
+      inch: (value, _) => Inch(value + value),
+    );
+  }
+
+  DistanceUnit operator -(DistanceUnit value) {
+    return when(
+      cm: (value) => Centimeter(value - value),
+      inch: (value, _) => Inch(value - value),
+    );
+  }
+
   static Inch toInch(double cm) {
     return Inch(cm * 2.54);
   }
